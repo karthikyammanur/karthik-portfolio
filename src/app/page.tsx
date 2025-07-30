@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
 
 const typingPhrases = [
 	"build AI tools, research space data, and code the future.",
@@ -60,6 +61,9 @@ export default function Home() {
 			</motion.section>
 			<section className="py-20 px-6">
 				<AboutSection />
+			</section>
+			<section className="py-20 px-6">
+				<ProjectsSection />
 			</section>
 		</>
 	);
