@@ -20,7 +20,7 @@ export default function Contact() {
         className="flex gap-6 mb-10"
       >
         <a
-          href="mailto:karthik.yammanur@utdallas.edu"
+          href="mailto:karthikyam2006@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-primary transition-colors text-2xl"
@@ -88,4 +88,3 @@ export default function Contact() {
     </div>
   );
 }
-```
