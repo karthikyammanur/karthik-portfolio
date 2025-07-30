@@ -5,9 +5,8 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
 	{ name: "Home", href: "/" },
+	{ name: "About", href: "/about" },
 	{ name: "Projects", href: "/projects" },
-	{ name: "Experience", href: "/experience" },
-	{ name: "Resume", href: "/resume" },
 	{ name: "Contact", href: "/contact" },
 ];
 
@@ -34,7 +33,7 @@ export default function Navbar() {
 							href={link.href}
 							className={`transition-colors font-medium hover:text-primary/80 ${
 								pathname === link.href
-									? "text-primary"
+									? "text-primary underline underline-offset-8 decoration-2"
 									: "text-gray-300"
 							}`}
 						>
@@ -80,7 +79,7 @@ export default function Navbar() {
 							href={link.href}
 							className={`transition-colors font-medium px-2 py-2 rounded hover:bg-primary/10 ${
 								pathname === link.href
-									? "text-primary"
+									? "text-primary underline underline-offset-8 decoration-2"
 									: "text-gray-300"
 							}`}
 							onClick={() => setMenuOpen(false)}

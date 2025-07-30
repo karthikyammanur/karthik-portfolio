@@ -9,7 +9,7 @@ const projects = [
 			"AI-powered energy advisory tool combining LSTM forecasting with RAG document analysis.",
 		techStack: ["React", "Flask", "Gemini API", "LSTM", "Chart.js"],
 		githubLink: "https://github.com/karthikyammanur/arkos",
-		liveLink: "#",
+		liveLink: "https://www.youtube.com/watch?v=3TiOBKwIfVY",
 		imageSrc: "/vercel.svg", // Replace with real image path
 	},
 	{
@@ -22,11 +22,11 @@ const projects = [
 		imageSrc: "/next.svg", // Replace with real image path
 	},
 	{
-		title: "AstroDash",
+		title: "CelestAI",
 		description:
-			"Space data dashboard for decoding and visualizing satellite telemetry using AI.",
-		techStack: ["Next.js", "Python", "Tailwind", "VAE", "VQGAN"],
-		githubLink: "https://github.com/karthikyammanur/astrodash",
+			"Generative Models for Astronomical Image Synthesis and Analysis",
+		techStack: ["Python", "Google Colab", "TensorFlow", "VAE", "VQGAN"],
+		githubLink: "https://github.com/karthikyammanur/acm-celestAI-vae-vqgan",
 		liveLink: "#",
 		imageSrc: "/globe.svg", // Replace with real image path
 	},
