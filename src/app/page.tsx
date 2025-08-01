@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import Contact from '@/components/Contact';
 
 const typingPhrases = [
 	"build AI tools, research space data, and code the future.",
