@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { Github, Linkedin, Mail, Send, MessageSquare, User } from "lucide-react";
 import { useState } from "react";
+import { ContactCard } from "@/components/Card";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -54,7 +56,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-3xl sm:text-4xl font-bold mb-6 text-center"
+        className="text-3xl sm:text-4xl font-bold mb-6 text-center glitch-hover"
       >
         Let's connect
       </motion.h1>
@@ -70,7 +72,7 @@ export default function Contact() {
           rel="noopener noreferrer"
           className="hover:text-primary transition-colors text-2xl"
         >
-          <FaEnvelope />
+          <Mail />
         </a>
         <a
           href="https://github.com/karthikyammanur"
@@ -78,7 +80,7 @@ export default function Contact() {
           rel="noopener noreferrer"
           className="hover:text-primary transition-colors text-2xl"
         >
-          <FaGithub />
+          <Github />
         </a>
         <a
           href="https://linkedin.com/in/karthikyammanur"
@@ -86,16 +88,17 @@ export default function Contact() {
           rel="noopener noreferrer"
           className="hover:text-primary transition-colors text-2xl"
         >
-          <FaLinkedin />
+          <Linkedin />
         </a>
       </motion.div>
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.4 }}
-        className="w-full max-w-md bg-[#18181b] rounded-2xl p-8 shadow-xl border border-white/10 flex flex-col gap-5"
-        onSubmit={handleSubmit}
-      >
+      <ContactCard className="w-full">
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="flex flex-col gap-5"
+          onSubmit={handleSubmit}
+        >
         {/* Success/Error Message */}
         {submitStatus !== "idle" && (
           <motion.div
@@ -114,7 +117,10 @@ export default function Contact() {
         )}
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">Name</span>
+          <span className="text-sm font-medium flex items-center gap-2">
+            <User className="w-4 h-4 text-cyan-400" />
+            Name
+          </span>
           <input
             type="text"
             name="name"
@@ -126,7 +132,10 @@ export default function Contact() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">Email</span>
+          <span className="text-sm font-medium flex items-center gap-2">
+            <Mail className="w-4 h-4 text-cyan-400" />
+            Email
+          </span>
           <input
             type="email"
             name="email"
@@ -138,7 +147,10 @@ export default function Contact() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium">Message</span>
+          <span className="text-sm font-medium flex items-center gap-2">
+            <MessageSquare className="w-4 h-4 text-cyan-400" />
+            Message
+          </span>
           <textarea
             name="message"
             value={formData.message}
@@ -152,7 +164,7 @@ export default function Contact() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="mt-2 rounded-full bg-primary text-white px-6 py-3 font-semibold shadow hover:bg-primary/90 transition-colors text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
@@ -160,10 +172,14 @@ export default function Contact() {
               Sending...
             </>
           ) : (
-            "Send Message"
+            <>
+              <Send className="w-4 h-4" />
+              Send Message
+            </>
           )}
         </button>
-      </motion.form>
+        </motion.form>
+      </ContactCard>
     </div>
   );
 }

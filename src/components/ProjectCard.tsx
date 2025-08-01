@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { Github, ExternalLink, Code2, Cpu, Database, Palette } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -77,7 +78,7 @@ export default function ProjectCard({
                 viewport={{ once: true, amount: 0.2 }}
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
-                className={`px-3 py-1 rounded-full text-xs font-medium ${techColors[tech] || "bg-primary/20 text-primary"}`}
+                className={`tech-badge px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider ${techColors[tech] || "bg-primary/20 text-primary"}`}
               >
                 {tech}
               </motion.span>
@@ -92,7 +93,7 @@ export default function ProjectCard({
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-primary/80 hover:text-white transition-colors font-semibold text-sm"
+                className="flex items-center gap-2 px-4 py-2 transition-transform duration-200 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#00ffff] hover:border-cyan-400"
                 onClick={e => e.stopPropagation()}
               >
                 <motion.span
@@ -100,7 +101,7 @@ export default function ProjectCard({
                   transition={{ duration: 0.2 }}
                   className="flex"
                 >
-                  <FaGithub className="w-4 h-4" />
+                  <Github className="w-4 h-4" />
                 </motion.span>
                 <span className="hidden sm:inline">GitHub</span>
               </motion.a>
@@ -113,10 +114,10 @@ export default function ProjectCard({
                 href={liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors font-semibold text-sm"
+                className="flex items-center gap-2 px-4 py-2 transition-transform duration-200 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400"
                 onClick={e => e.stopPropagation()}
               >
-                <FaExternalLinkAlt className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" />
                 <span className="hidden sm:inline">Live Demo</span>
               </motion.a>
             )}
@@ -161,7 +162,7 @@ export default function ProjectCard({
                   viewport={{ once: true, amount: 0.2 }}
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${techColors[tech] || "bg-primary/20 text-primary"}`}
+                  className={`tech-badge px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider ${techColors[tech] || "bg-primary/20 text-primary"}`}
                 >
                   {tech}
                 </motion.span>
@@ -176,14 +177,14 @@ export default function ProjectCard({
                   href={githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-primary/80 hover:text-white transition-colors font-semibold text-sm"
+                  className="flex items-center gap-2 px-4 py-2 transition duration-300 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:shadow-[0_0_10px_#00ffff] hover:border-cyan-400"
                 >
                   <motion.span
                     whileHover={{ textShadow: "0 0 8px #6ee7b7, 0 0 16px #6ee7b7" }}
                     transition={{ duration: 0.2 }}
                     className="flex"
                   >
-                    <FaGithub className="w-4 h-4" />
+                    <Github className="w-4 h-4" />
                   </motion.span>
                   <span className="hidden sm:inline">GitHub</span>
                 </motion.a>
@@ -196,9 +197,9 @@ export default function ProjectCard({
                   href={liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors font-semibold text-sm"
+                  className="flex items-center gap-2 px-4 py-2 transition duration-300 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:shadow-[0_0_10px_#ff00ff] hover:border-pink-400"
                 >
-                  <FaExternalLinkAlt className="w-4 h-4" />
+                  <ExternalLink className="w-4 h-4" />
                   <span className="hidden sm:inline">Live Demo</span>
                 </motion.a>
               )}

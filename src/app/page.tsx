@@ -3,12 +3,12 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Rocket, Download, Sparkles } from "lucide-react";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import Contact from '@/components/Contact';
 
 const typingPhrases = [
-	"build AI tools, research space data, and code the future.",
+	"computer engineering @ ut dallas • aspiring AI/ML researcher",
 ];
 
 function TypingAnimation() {
@@ -41,21 +41,17 @@ export default function Home() {
 				transition={{ duration: 0.8, ease: "easeOut" }}
 				className="flex flex-col items-center justify-center min-h-[80vh] w-full text-center"
 			>
-				<h1 className="text-3xl sm:text-5xl font-bold mb-4">
-					Hey, I’m Karthik.
+				<h1 className="text-3xl sm:text-5xl font-bold mb-4 glitch-subtle flex items-center justify-center gap-3">
+					I'm Karthik Yammanur
+					<Rocket className="w-8 h-8 sm:w-12 sm:h-12 text-cyan-400" />
 				</h1>
 				<TypingAnimation />
 				<div className="flex gap-4 mt-8 flex-col sm:flex-row justify-center">
 					<a
-						href="#projects"
-						className="rounded-full bg-primary text-white px-6 py-3 font-semibold shadow hover:bg-primary/90 transition-colors text-base"
-					>
-						View Projects
-					</a>
-					<a
 						href="/resume"
-						className="rounded-full border border-primary text-primary px-6 py-3 font-semibold shadow hover:bg-primary hover:text-white transition-colors text-base"
+						className="group relative rounded-full border border-primary text-primary px-6 py-3 font-semibold shadow transition-all duration-200 hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-magenta-500/50 before:absolute before:inset-0 before:rounded-full before:bg-magenta-400/20 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 text-base flex items-center gap-2"
 					>
+						<Download className="w-5 h-5" />
 						Download Resume
 					</a>
 				</div>
