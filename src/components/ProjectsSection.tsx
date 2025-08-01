@@ -35,20 +35,23 @@ const projects = [
 
 export default function ProjectsSection() {
 	return (
-		<section className="w-full max-w-6xl mx-auto px-4 py-20">
-			<motion.h2
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.7 }}
-				className="text-2xl sm:text-3xl font-bold mb-10 text-white text-center"
-			>
-				Projects
-			</motion.h2>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{projects.map((project) => (
-					<ProjectCard key={project.title} {...project} />
-				))}
-			</div>
-		</section>
+		<>
+			<section className="w-full max-w-6xl mx-auto px-4 py-10">
+				<motion.h2
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, amount: 0.5 }}
+					transition={{ duration: 0.7 }}
+					className="text-2xl sm:text-3xl font-bold mb-10 text-white text-center"
+				>
+					Featured Projects
+				</motion.h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{projects.map((project) => (
+						<ProjectCard key={project.title} {...project} />
+					))}
+				</div>
+			</section>
+		</>
 	);
 }

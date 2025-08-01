@@ -46,8 +46,11 @@ export default function ProjectCard({
   return (
     <>
       <motion.div
-        whileHover={{ y: -8, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.35)" }}
-        transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        whileHover={{ scale: 1.03, y: -8, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.35)" }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 20, delay: 0 }}
         className="bg-[#18181b] rounded-2xl p-0 flex flex-col gap-4 shadow-xl border border-white/10 w-full max-w-md mx-auto hover:shadow-primary/40 hover:border-primary/40 transition-all duration-150 overflow-hidden cursor-pointer"
         onClick={() => setOpen(true)}
       >
@@ -67,12 +70,17 @@ export default function ProjectCard({
           </div>
           <div className="flex flex-wrap gap-2 mb-4">
             {techStack.map((tech) => (
-              <span
+              <motion.span
                 key={tech}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium ${techColors[tech] || "bg-primary/20 text-primary"}`}
               >
                 {tech}
-              </span>
+              </motion.span>
             ))}
           </div>
           <div className="flex gap-3 mt-auto">
@@ -80,13 +88,20 @@ export default function ProjectCard({
               <motion.a
                 whileHover={{ scale: 1.1, boxShadow: "0 0 8px #fff, 0 0 16px #6ee7b7" }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-primary/80 hover:text-white transition-colors font-semibold text-sm"
                 onClick={e => e.stopPropagation()}
               >
-                <FaGithub className="w-4 h-4" />
+                <motion.span
+                  whileHover={{ textShadow: "0 0 8px #6ee7b7, 0 0 16px #6ee7b7" }}
+                  transition={{ duration: 0.2 }}
+                  className="flex"
+                >
+                  <FaGithub className="w-4 h-4" />
+                </motion.span>
                 <span className="hidden sm:inline">GitHub</span>
               </motion.a>
             )}
@@ -94,6 +109,7 @@ export default function ProjectCard({
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
                 href={liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -138,12 +154,17 @@ export default function ProjectCard({
             <p className="text-gray-300 text-base mb-4">{description}</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {techStack.map((tech) => (
-                <span
+                <motion.span
                   key={tech}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
                   className={`px-3 py-1 rounded-full text-xs font-medium ${techColors[tech] || "bg-primary/20 text-primary"}`}
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </div>
             <div className="flex gap-3 mt-2">
@@ -151,12 +172,19 @@ export default function ProjectCard({
                 <motion.a
                   whileHover={{ scale: 1.1, boxShadow: "0 0 8px #fff, 0 0 16px #6ee7b7" }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   href={githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-primary/80 hover:text-white transition-colors font-semibold text-sm"
                 >
-                  <FaGithub className="w-4 h-4" />
+                  <motion.span
+                    whileHover={{ textShadow: "0 0 8px #6ee7b7, 0 0 16px #6ee7b7" }}
+                    transition={{ duration: 0.2 }}
+                    className="flex"
+                  >
+                    <FaGithub className="w-4 h-4" />
+                  </motion.span>
                   <span className="hidden sm:inline">GitHub</span>
                 </motion.a>
               )}
@@ -164,6 +192,7 @@ export default function ProjectCard({
                 <motion.a
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   href={liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
