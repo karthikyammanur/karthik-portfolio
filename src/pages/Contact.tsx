@@ -52,14 +52,15 @@ export default function Contact() {
   };
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-20">
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-3xl sm:text-4xl font-bold mb-6 text-center glitch-hover"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6"
       >
-        Let's connect
-      </motion.h1>
+        <MessageSquare className="text-primary text-2xl" />
+        <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-bold">Let&apos;s Connect</h1>
+      </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
