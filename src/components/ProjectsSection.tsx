@@ -1,34 +1,36 @@
 "use client";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
+import { FaCode } from "react-icons/fa";
+import Link from "next/link";
 
 const projects = [
 	{
 		title: "NEWT",
 		description:
-			"AI tech news summarizer using Gemini RAG, vector search, and user preferences.",
+			"Created a personalized tech news summarization platform powered by a Gemini-based RAG pipeline. Engineered a FastAPI backend with ChromaDB vector search and MongoDB, enabling dynamic topic feeds and summary generation. Designed a modern React frontend with user authentication, likes, and topic filtering for personalized engagement.",
 		techStack: ["React", "FastAPI", "Gemini API", "ChromaDB", "MongoDB"],
 		githubLink: "https://github.com/karthikyammanur/newt",
-		imageSrc: "/newt_image.jpg", 
+		imageSrc: "/newt_image.png", 
+	},
+	{
+		title: "ACM Research at UTD",
+		description:
+			"Researched and implemented VAE and VQGAN models to generate synthetic images of rare astronomical phenomena using the Multimodal Universe dataset. Leveraged TensorFlow, NumPy, and Matplotlib to achieve low reconstruction loss and high visual quality, and compared performance across generative models including DCGAN and StyleGAN to evaluate trade-offs in quality and efficiency.",
+		techStack: ["Python", "Google Colab", "TensorFlow", "VAE", "VQGAN"],
+		githubLink: "https://github.com/karthikyammanur/acm-celestAI-vae-vqgan",
+		imageSrc: "/celestai_image.png",
 	},
 	{
 		title: "Arkos",
 		description:
-			"AI-powered energy advisory tool combining LSTM forecasting with RAG document analysis.",
+			"Developed an AI-powered energy advisory platform featuring an LSTM model for demand forecasting and a RAG system for document-grounded insights. Integrated Gemini API, PyMuPDF, and ChromaDB within a Flask backend, and built a responsive React frontend with Chart.js visualizations and AI-generated energy recommendations.",
 		techStack: ["React", "Flask", "Gemini API", "LSTM", "Chart.js"],
 		githubLink: "https://github.com/karthikyammanur/arkos",
 		liveLink: "https://www.youtube.com/watch?v=3TiOBKwIfVY",
 		imageSrc: "/arkos_image.jpg",
 	},
 	
-	{
-		title: "CelestAI",
-		description:
-			"Generative Models for Astronomical Image Synthesis and Analysis",
-		techStack: ["Python", "Google Colab", "TensorFlow", "VAE", "VQGAN"],
-		githubLink: "https://github.com/karthikyammanur/acm-celestAI-vae-vqgan",
-		imageSrc: "/celestai_image.png",
-	},
 	// Add more projects as needed
 ];
 
@@ -42,9 +44,10 @@ export default function ProjectsSection() {
 				transition={{ duration: 0.7 }}
 				className="text-center mb-16"
 			>
-				<h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
-					Featured Projects
-				</h2>
+				<div className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6">
+					<FaCode className="text-primary text-2xl" />
+					<h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-bold">Portfolio Showcase</h2>
+				</div>
 				<p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
 					Explore my latest work in AI, web development, and innovative technology solutions
 				</p>
@@ -74,7 +77,7 @@ export default function ProjectsSection() {
 				))}
 			</motion.div>
 
-			{/* Additional Projects Hint */}
+			{/* View All Projects Button */}
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -82,11 +85,12 @@ export default function ProjectsSection() {
 				transition={{ duration: 0.6, delay: 0.4 }}
 				className="text-center mt-16"
 			>
-				<div className="inline-flex items-center gap-2 text-gray-400 text-sm">
-					<div className="w-1 h-1 bg-primary rounded-full"></div>
-					<span>More projects available on GitHub</span>
-					<div className="w-1 h-1 bg-primary rounded-full"></div>
-				</div>
+				<Link
+					href="/projects"
+					className="group relative inline-flex items-center gap-2 rounded-full border border-primary text-primary px-8 py-3 font-semibold shadow transition-all duration-200 hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-cyan-500/50 before:absolute before:inset-0 before:rounded-full before:bg-cyan-400/20 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 text-base"
+				>
+					View All Projects
+				</Link>
 			</motion.div>
 		</section>
 	);
