@@ -15,13 +15,13 @@ export default function Navbar() {
 	const pathname = usePathname();
 
 	return (
-		<nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl flex justify-between items-center px-8 py-4 rounded-full bg-[#111]/30 backdrop-blur-md border border-white/10 shadow-lg shadow-pink-500/10 hover:shadow-pink-500/30 hover:border-pink-400/40 transition-all duration-300">
+		<nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl flex justify-between items-center px-8 py-4 rounded-full bg-[#111]/30 backdrop-blur-md border border-white/10 shadow-lg shadow-red-500/10 hover:shadow-red-500/30 hover:border-red-400/40 transition-all duration-300">
 			{/* Logo/Name */}
 			<Link
 				href="/"
 				className="text-white font-mono text-xl font-bold tracking-wider select-none uppercase flex items-center gap-3"
 			>
-				<Code className="w-7 h-7 text-primary" />
+				<Code className="w-7 h-7 text-white" />
 				Karthik Yammanur
 			</Link>
 			{/* Desktop nav */}
