@@ -37,7 +37,7 @@ const allProjects = [
   {
     title: "Pocket Secretary",
     description:
-      "Pocket Secretary is an AI-powered scheduling assistant that converts casual text or image-based inputs into structured calendar events. Co-developed with a focus on accessibility and ease of use, building a responsive chatbot interface using Figma and Flutter. The assistant leverages Google&apos;s Gemini API to intelligently interpret slang, typos, and natural language. Integrated Supabase for real-time data storage and event syncing across user devices.",
+      "Pocket Secretary is an AI-powered scheduling assistant that converts casual text or image-based inputs into structured calendar events. Co-developed with a focus on accessibility and ease of use, building a responsive chatbot interface using Figma and Flutter. The assistant leverages Google's Gemini API to intelligently interpret slang, typos, and natural language. Integrated Supabase for real-time data storage and event syncing across user devices.",
     techStack: ["Flutter", "Figma", "Gemini API", "Supabase", "Dart"],
     githubLink: "https://github.com/karthikyammanur/PocketSecretary",
     liveLink: "https://youtu.be/HN1H2H2MC2E",
@@ -46,7 +46,7 @@ const allProjects = [
   {
     title: "Sai Meghna Dance School Website",
     description:
-      "This is a custom-built full-stack website created for my mom&apos;s Kuchipudi dance school using the MERN stack. The frontend was developed in React and styled with Tailwind CSS, enhanced by animations from Framer Motion and AOS. It includes features like a testimonial carousel, dynamic routing, and a floating chat modal. On the backend, Express and MongoDB handle form submissions and data management. The site is fully mobile-responsive and branded with Indian cultural motifs to reflect the school&apos;s identity.",
+      "This is a custom-built full-stack website created for my mom's Kuchipudi dance school using the MERN stack. The frontend was developed in React and styled with Tailwind CSS, enhanced by animations from Framer Motion and AOS. It includes features like a testimonial carousel, dynamic routing, and a floating chat modal. On the backend, Express and MongoDB handle form submissions and data management. The site is fully mobile-responsive and branded with Indian cultural motifs to reflect the school's identity.",
     techStack: ["React", "Node.js", "MongoDB", "Express", "Tailwind", "Framer Motion"],
     githubLink: "https://github.com/karthikyammanur/sai-meghna-dance-school",
     imageSrc: "/globe.svg",

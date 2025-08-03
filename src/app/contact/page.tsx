@@ -1,23 +1,24 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { Github, Linkedin, Mail, Send, MessageSquare, User } from "lucide-react";
 import { useState } from "react";
+import { User, Mail, MessageSquare, Github, Linkedin, Send } from "lucide-react";
 import { ContactCard } from "@/components/Card";
 
-export default function Contact() {
+export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setSubmitStatus("idle");
+
     try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
@@ -50,6 +51,7 @@ export default function Contact() {
       [e.target.name]: e.target.value
     }));
   };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-20">
       <motion.div
@@ -118,7 +120,7 @@ export default function Contact() {
         )}
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
             <User className="w-4 h-4 text-white" />
             Name
           </span>
@@ -128,12 +130,13 @@ export default function Contact() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="rounded-lg bg-black border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             placeholder="Your full name"
           />
         </label>
+
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
             <Mail className="w-4 h-4 text-white" />
             Email
           </span>
@@ -143,12 +146,13 @@ export default function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="rounded-lg bg-black border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
             placeholder="your.email@example.com"
           />
         </label>
+
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-300 flex items-center gap-2">
             <MessageSquare className="w-4 h-4 text-white" />
             Message
           </span>
@@ -157,19 +161,22 @@ export default function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            rows={4}
-            className="rounded-lg bg-black border border-white/20 px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none transition-colors"
-            placeholder="Type in your message here!"
+            rows={5}
+            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"
+            placeholder="Tell me about your project or just say hello!"
           />
         </label>
-        <button
+
+        <motion.button
           type="submit"
           disabled={isSubmitting}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
               Sending...
             </>
           ) : (
@@ -178,7 +185,7 @@ export default function Contact() {
               Send Message
             </>
           )}
-        </button>
+        </motion.button>
         </motion.form>
       </ContactCard>
     </div>
