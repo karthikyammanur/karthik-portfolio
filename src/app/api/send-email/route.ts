@@ -1,27 +1,17 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-type Data = {
-  message: string;
-  success: boolean;
-};
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed', success: false });
-  }
-
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: 'All fields are required', success: false });
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    
+    const { name, email, message } = await request.json();
+
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { message: 'All fields are required', success: false },
+        { status: 400 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -76,9 +66,12 @@ export default async function handler(
     // Send the email
     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ message: 'Email sent successfully', success: true });
+    return NextResponse.json({ message: 'Email sent successfully', success: true });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ message: 'Failed to send email', success: false });
+    return NextResponse.json(
+      { message: 'Failed to send email', success: false },
+      { status: 500 }
+    );
   }
 }
