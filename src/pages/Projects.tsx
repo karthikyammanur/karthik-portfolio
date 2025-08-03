@@ -100,11 +100,11 @@ export default function Projects() {
             className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400"
           >
             <div className="flex items-center gap-2">
-              <FaRocket className="text-primary" />
+              <FaRocket className="text-white" />
               <span>Production Ready</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaGithub className="text-primary" />
+              <FaGithub className="text-white" />
               <span>Open Source</span>
             </div>
             <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export default function Projects() {
                 href="/contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400 hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10"
               >
                 Get In Touch
                 <FaRocket className="text-lg" />
@@ -180,7 +180,7 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400 hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10"
               >
                 View All Projects
                 <FaGithub className="text-lg" />

@@ -12,7 +12,7 @@ const techColors: Record<string, string> = {
   "Next.js": "bg-gray-800 text-white",
   Flask: "bg-green-700 text-white",
   "Gemini API": "bg-purple-500 text-white",
-  LSTM: "bg-pink-500 text-white",
+  LSTM: "bg-red-500 text-white",
   "Chart.js": "bg-orange-400 text-white",
   FastAPI: "bg-green-500 text-white",
   ChromaDB: "bg-fuchsia-500 text-white",
@@ -52,7 +52,7 @@ export default function ProjectCard({
         viewport={{ once: true, amount: 0.2 }}
         whileHover={{ scale: 1.03, y: -8, boxShadow: "0 8px 32px 0 rgba(255,20,147,0.3)" }}
         transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 20, delay: 0 }}
-        className="bg-[#18181b] rounded-2xl p-0 flex flex-col gap-4 shadow-xl border border-white/10 w-full max-w-md mx-auto hover:shadow-pink-500/40 hover:border-pink-400/60 transition-all duration-150 overflow-hidden cursor-pointer h-full shadow-pink-500/10"
+        className="bg-[#18181b] rounded-2xl p-0 flex flex-col gap-4 shadow-xl border border-white/10 w-full max-w-md mx-auto hover:shadow-red-500/40 hover:border-red-400/60 transition-all duration-150 overflow-hidden cursor-pointer h-full shadow-red-500/10"
         onClick={() => setOpen(true)}
       >
         <div className="relative w-full h-48 bg-black flex items-center justify-center group overflow-hidden">
@@ -93,7 +93,7 @@ export default function ProjectCard({
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 transition-all duration-200 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400 hover:bg-pink-500/20"
+                className="flex items-center gap-2 px-4 py-2 transition-all duration-200 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-red-500/20"
                 onClick={e => e.stopPropagation()}
               >
                 <Github className="w-4 h-4" />
@@ -108,7 +108,7 @@ export default function ProjectCard({
                 href={liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 transition-all duration-200 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400"
+                className="flex items-center gap-2 px-4 py-2 transition-all duration-200 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400"
                 onClick={e => e.stopPropagation()}
               >
                 <ExternalLink className="w-4 h-4" />
@@ -171,7 +171,7 @@ export default function ProjectCard({
                   href={githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:shadow-[0_0_10px_#ff00ff] hover:border-pink-400 hover:bg-pink-500/20"
+                  className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out border border-white/20 rounded-xl bg-white/10 text-white font-semibold text-sm hover:shadow-[0_0_10px_#dc2626] hover:border-red-400 hover:bg-red-500/20"
                 >
                   <Github className="w-4 h-4" />
                   <span className="hidden sm:inline">GitHub</span>
@@ -185,7 +185,7 @@ export default function ProjectCard({
                   href={liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:shadow-[0_0_10px_#ff00ff] hover:border-pink-400"
+                  className="flex items-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out border border-white/20 rounded-xl bg-primary text-white font-semibold text-sm hover:shadow-[0_0_10px_#dc2626] hover:border-red-400"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span className="hidden sm:inline">Live Demo</span>

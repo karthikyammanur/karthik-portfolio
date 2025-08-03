@@ -15,7 +15,7 @@ export default function Card({
   hover = true 
 }: CardProps) {
   const cardContent = (
-    <div className={`bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-md shadow-pink-500/5 ${hover ? 'hover:bg-white/10 hover:border-pink-400/30 hover:shadow-pink-500/20 transition-all duration-300' : ''} ${className}`}>
+    <div className={`bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-md shadow-red-500/5 ${hover ? 'hover:bg-white/10 hover:border-red-400/30 hover:shadow-red-500/20 transition-all duration-300' : ''} ${className}`}>
       {children}
     </div>
   );
@@ -63,7 +63,7 @@ export function FeatureCard({ children, className = "" }: { children: ReactNode;
 export function ContactCard({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <Card 
-      className={`max-w-2xl mx-auto ${className}`}
+      className={`max-w-4xl mx-auto ${className}`}
       hover={false}
     >
       {children}

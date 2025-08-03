@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Rocket, Download, Sparkles } from "lucide-react";
+import { Rocket, Sparkles } from "lucide-react";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 
@@ -23,7 +23,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 		return () => clearTimeout(timeout);
 	}, [index]);
 	return (
-		<span className="text-lg sm:text-2xl font-mono text-primary/90 min-h-[2.5rem] inline-block">
+		<span className="text-lg sm:text-2xl font-mono text-white min-h-[2.5rem] inline-block">
 			{displayed}
 			<span className="animate-pulse">|</span>
 		</span>
@@ -44,18 +44,9 @@ export default function Home() {
 					<div className="flex flex-col items-center lg:items-start text-center lg:text-left">
 						<h1 className="text-3xl sm:text-5xl font-bold mb-4 glitch-subtle flex items-center justify-center lg:justify-start gap-3">
 							I&apos;m Karthik Yammanur
-							<Rocket className="w-10 h-10 sm:w-14 sm:h-14 text-primary" />
+							<Rocket className="w-10 h-10 sm:w-14 sm:h-14 text-white" />
 						</h1>
 						<TypingAnimation />
-						<div className="flex gap-4 mt-8 flex-col sm:flex-row justify-center lg:justify-start">
-							<a
-								href="/resume"
-								className="group relative rounded-full border border-primary text-primary px-6 py-3 font-semibold shadow transition-all duration-200 hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-magenta-500/50 before:absolute before:inset-0 before:rounded-full before:bg-magenta-400/20 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 text-base flex items-center gap-2"
-							>
-								<Download className="w-5 h-5" />
-								Download Resume
-							</a>
-						</div>
 					</div>
 					
 					{/* Right Column - About Section */}

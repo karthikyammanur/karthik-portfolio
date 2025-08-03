@@ -119,7 +119,7 @@ export default function Contact() {
 
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <User className="w-4 h-4 text-primary" />
+            <User className="w-4 h-4 text-white" />
             Name
           </span>
           <input
@@ -134,7 +134,7 @@ export default function Contact() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <Mail className="w-4 h-4 text-primary" />
+            <Mail className="w-4 h-4 text-white" />
             Email
           </span>
           <input
@@ -149,7 +149,7 @@ export default function Contact() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-primary" />
+            <MessageSquare className="w-4 h-4 text-white" />
             Message
           </span>
           <textarea
@@ -165,7 +165,7 @@ export default function Contact() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#ff00ff] hover:border-pink-400 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>

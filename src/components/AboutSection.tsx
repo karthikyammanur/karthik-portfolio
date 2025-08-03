@@ -9,7 +9,7 @@ const skills = [
   { name: "Python", icon: <FaPython className="text-yellow-400" /> },
   { name: "C++", icon: <SiCplusplus className="text-blue-400" /> },
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-  { name: "React", icon: <FaReact className="text-primary" /> },
+  { name: "React", icon: <FaReact className="text-white" /> },
   { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
   { name: "TensorFlow", icon: <SiTensorflow className="text-orange-400" /> },
   { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
@@ -31,14 +31,14 @@ export default function AboutSection() {
     >
       <Card className="text-center">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-white flex items-center justify-center gap-3">
-          <Brain className="w-8 h-8 text-primary" />
+          <Brain className="w-8 h-8 text-white" />
           About Me
         </h2>
         <p className="text-base sm:text-lg text-gray-300 mb-8 leading-relaxed">
           I&apos;m a Computer Engineering student at UT Dallas focused on building impactful tools with AI. I&apos;ve worked on research projects involving generative models like VAEs and VQGANs, energy optimization systems using LSTM networks, and AI summarization pipelines using Gemini and FastAPI. Whether it&apos;s decoding space data or building usable dashboards, I love blending logic with creativity.
         </p>
         <h3 className="font-semibold text-white mb-6 flex items-center justify-center gap-2">
-          <Code className="w-5 h-5 text-primary" />
+          <Code className="w-5 h-5 text-white" />
           Skills & Technologies
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
