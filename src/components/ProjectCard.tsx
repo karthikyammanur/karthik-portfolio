@@ -8,7 +8,7 @@ import Image from "next/image";
 const techColors: Record<string, string> = {
   Python: "bg-blue-500 text-white",
   "C++": "bg-blue-400 text-white",
-  React: "bg-cyan-400 text-white",
+  React: "bg-primary text-white",
   "Next.js": "bg-gray-800 text-white",
   Flask: "bg-green-700 text-white",
   "Gemini API": "bg-purple-500 text-white",

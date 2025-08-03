@@ -87,7 +87,7 @@ export default function ProjectsSection() {
 			>
 				<Link
 					href="/projects"
-					className="group relative inline-flex items-center gap-2 rounded-full border border-primary text-primary px-8 py-3 font-semibold shadow transition-all duration-200 hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-cyan-500/50 before:absolute before:inset-0 before:rounded-full before:bg-cyan-400/20 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 text-base"
+					className="group relative inline-flex items-center gap-2 rounded-full border border-primary text-primary px-8 py-3 font-semibold shadow transition-all duration-200 hover:scale-105 hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-pink-500/50 before:absolute before:inset-0 before:rounded-full before:bg-pink-400/20 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 text-base"
 				>
 					View All Projects
 				</Link>
