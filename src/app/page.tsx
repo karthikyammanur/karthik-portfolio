@@ -44,7 +44,7 @@ export default function Home() {
 					<div className="flex flex-col items-center lg:items-start text-center lg:text-left">
 						<h1 className="text-3xl sm:text-5xl font-bold mb-4 glitch-subtle flex items-center justify-center lg:justify-start gap-3">
 							I&apos;m Karthik Yammanur
-							<Rocket className="w-10 h-10 sm:w-14 sm:h-14 text-cyan-400" />
+							<Rocket className="w-10 h-10 sm:w-14 sm:h-14 text-primary" />
 						</h1>
 						<TypingAnimation />
 						<div className="flex gap-4 mt-8 flex-col sm:flex-row justify-center lg:justify-start">

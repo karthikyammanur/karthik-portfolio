@@ -119,7 +119,7 @@ export default function Contact() {
 
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <User className="w-4 h-4 text-cyan-400" />
+            <User className="w-4 h-4 text-primary" />
             Name
           </span>
           <input
@@ -134,7 +134,7 @@ export default function Contact() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <Mail className="w-4 h-4 text-cyan-400" />
+            <Mail className="w-4 h-4 text-primary" />
             Email
           </span>
           <input
@@ -149,7 +149,7 @@ export default function Contact() {
         </label>
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-cyan-400" />
+            <MessageSquare className="w-4 h-4 text-primary" />
             Message
           </span>
           <textarea

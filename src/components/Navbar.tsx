@@ -21,7 +21,7 @@ export default function Navbar() {
 				href="/"
 				className="text-white font-mono text-xl font-bold tracking-wider select-none uppercase flex items-center gap-3"
 			>
-				<Code className="w-7 h-7 text-cyan-400" />
+				<Code className="w-7 h-7 text-primary" />
 				Karthik Yammanur
 			</Link>
 			{/* Desktop nav */}
@@ -32,9 +32,9 @@ export default function Navbar() {
 						<li key={link.name}>
 							<Link
 								href={link.href}
-								className={`uppercase tracking-wide transition-colors hover:text-cyan-400 flex items-center gap-2 py-2 ${
+								className={`uppercase tracking-wide transition-colors hover:text-primary flex items-center gap-2 py-2 ${
 									pathname === link.href
-										? "text-cyan-400"
+										? "text-primary"
 										: "text-gray-300"
 								}`}
 							>
@@ -47,7 +47,7 @@ export default function Navbar() {
 			</ul>
 			{/* Hamburger for mobile */}
 			<button
-				className="md:hidden p-3 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
+				className="md:hidden p-3 rounded focus:outline-none focus:ring-2 focus:ring-primary"
 				onClick={() => setMenuOpen((v) => !v)}
 				aria-label="Toggle menu"
 			>
@@ -64,9 +64,9 @@ export default function Navbar() {
 								<Link
 									key={link.name}
 									href={link.href}
-									className={`block px-8 py-3 font-mono text-base uppercase tracking-wide transition-colors hover:text-cyan-400 flex items-center gap-3 ${
+									className={`block px-8 py-3 font-mono text-base uppercase tracking-wide transition-colors hover:text-primary flex items-center gap-3 ${
 										pathname === link.href
-											? "text-cyan-400"
+											? "text-primary"
 											: "text-gray-300"
 									}`}
 									onClick={() => setMenuOpen(false)}
