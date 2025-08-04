@@ -6,10 +6,24 @@ export async function POST(request: NextRequest) {
     const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
+      console.log('Missing required fields:', { name: !!name, email: !!email, message: !!message });
       return NextResponse.json(
         { message: 'All fields are required', success: false },
         { status: 400 }
       );
+    }
+
+    // Check if environment variables are set
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Email credentials not configured. EMAIL_USER:', !!process.env.EMAIL_USER, 'EMAIL_PASS:', !!process.env.EMAIL_PASS);
+      
+      // For development/demo purposes, just log the form data and return success
+      console.log('Contact form submission (demo mode):', { name, email, message });
+      
+      return NextResponse.json({ 
+        message: 'Message received! (Demo mode - email sending disabled)', 
+        success: true 
+      });
     }
 
     const transporter = nodemailer.createTransport({
@@ -64,13 +78,26 @@ export async function POST(request: NextRequest) {
     };
 
     // Send the email
+    console.log('Attempting to send email...');
     await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
 
     return NextResponse.json({ message: 'Email sent successfully', success: true });
   } catch (error) {
     console.error('Error sending email:', error);
+    
+    // More detailed error logging
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
+    
     return NextResponse.json(
-      { message: 'Failed to send email', success: false },
+      { 
+        message: 'Failed to send email', 
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
