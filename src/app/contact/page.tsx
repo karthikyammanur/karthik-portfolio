@@ -86,7 +86,7 @@ export default function ContactPage() {
           <Github />
         </a>
         <a
-          href="https://linkedin.com/in/karthikyammanur"
+          href="https://www.linkedin.com/in/karthik-yammanur/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-primary transition-colors text-2xl"
