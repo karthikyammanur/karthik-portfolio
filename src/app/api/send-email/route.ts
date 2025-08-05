@@ -32,7 +32,22 @@ export async function POST(request: NextRequest) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      debug: true, // Enable debug output
+      logger: true // Log information in console
     });
+
+    // Verify the transporter configuration
+    try {
+      await transporter.verify();
+      console.log('SMTP server is ready to take our messages');
+    } catch (error) {
+      console.error('SMTP server verification failed:', error);
+      return NextResponse.json({
+        message: 'Email configuration error',
+        success: false,
+        error: 'SMTP server verification failed'
+      }, { status: 500 });
+    }
 
     // Email content
     const mailOptions = {
