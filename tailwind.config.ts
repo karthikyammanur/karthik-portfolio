@@ -10,9 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-source-code-pro)', 'Source Code Pro', 'monospace'],
-        'source-code-pro': ['var(--font-source-code-pro)', 'Source Code Pro', 'monospace'],
-        mono: ['var(--font-source-code-pro)', 'Source Code Pro', 'monospace'],
+        sans: ['var(--font-tomorrow)', 'Tomorrow', 'sans-serif'],
+        'tomorrow': ['var(--font-tomorrow)', 'Tomorrow', 'sans-serif'],
+        mono: ['var(--font-tomorrow)', 'Tomorrow', 'sans-serif'],
       },
       colors: {
         primary: {

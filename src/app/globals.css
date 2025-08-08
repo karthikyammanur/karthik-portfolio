@@ -60,34 +60,34 @@ body::before {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.025em;
 }
 
 /* Headings with uppercase transform and enhanced letter spacing */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
 }
 
-/* Enhanced button styling with Source Code Pro */
+/* Enhanced button styling with Tomorrow */
 button {
-  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 /* Navigation and special elements */
 nav {
-  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.05em;
 }
 
 /* Tech stack badges and labels */
 .tech-badge, .badge, .label {
-  font-family: var(--font-source-code-pro), 'Source Code Pro', monospace;
+  font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
