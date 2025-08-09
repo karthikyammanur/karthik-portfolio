@@ -62,12 +62,18 @@ body {
   color: var(--foreground);
   font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.025em;
-  cursor: none; /* Hide default cursor */
 }
 
-/* Hide cursor on all interactive elements */
-*, *::before, *::after {
-  cursor: none !important;
+/* Hide cursor only on desktop/non-touch devices */
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  body {
+    cursor: none;
+  }
+  
+  /* Hide cursor on all interactive elements for desktop */
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 /* Headings with uppercase transform and enhanced letter spacing */
