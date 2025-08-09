@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Rocket, Sparkles, Github, Linkedin, Mail } from "lucide-react";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import ExperienceSection from "@/components/ExperienceSection";
 import Link from "next/link";
 
 	const typingPhrases = [
@@ -132,6 +133,9 @@ export default function Home() {
 			</motion.section>
 			<section className="py-20 px-6">
 				<ProjectsSection />
+			</section>
+			<section className="py-20 px-6">
+				<ExperienceSection />
 			</section>
 		</>
 	);
