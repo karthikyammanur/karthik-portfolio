@@ -70,13 +70,13 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           className="text-center max-w-4xl mx-auto"
         >
           <motion.h1
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold"
           >
             <FaCode className="text-primary text-2xl sm:text-3xl" />
@@ -86,7 +86,7 @@ export default function Projects() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 0.35, delay: 0.2 }}
             className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed"
           >
             A collection of projects showcasing my expertise in AI, web development, 
@@ -96,7 +96,7 @@ export default function Projects() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
+            transition={{ duration: 0.35, delay: 0.25 }}
             className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400"
           >
             <div className="flex items-center gap-2">
@@ -119,14 +119,14 @@ export default function Projects() {
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
         className="w-full max-w-7xl mx-auto px-4 py-16"
       >
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
         >
           {allProjects.map((project, index) => (
@@ -136,8 +136,8 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
+                duration: 0.3, 
+                delay: index * 0.05,
                 ease: "easeOut"
               }}
             >
@@ -152,7 +152,7 @@ export default function Projects() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.4 }}
         className="px-4 py-20 lg:py-32"
       >
         <div className="max-w-4xl mx-auto text-center">

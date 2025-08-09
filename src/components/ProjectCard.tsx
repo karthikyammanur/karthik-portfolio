@@ -51,7 +51,7 @@ export default function ProjectCard({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         whileHover={{ scale: 1.03, y: -8, boxShadow: "0 8px 32px 0 rgba(255,20,147,0.3)" }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 20, delay: 0 }}
+        transition={{ duration: 0.25, type: "spring", stiffness: 300, damping: 20, delay: 0 }}
         className="bg-[#18181b] rounded-2xl p-0 flex flex-col gap-4 shadow-xl border border-white/10 w-full max-w-md mx-auto hover:shadow-red-500/40 hover:border-red-400/60 transition-all duration-150 overflow-hidden cursor-pointer h-full shadow-red-500/10"
         onClick={() => setOpen(true)}
       >

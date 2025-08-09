@@ -16,14 +16,14 @@ const featuredExperiences = [
   {
     company: "Cohort Science",
     role: "Software Engineering Intern",
-    period: "2024",
+    period: "March 2025 - May 2025",
     summary: "Prototyped a dashboard UI to visualize ANN-generated research insights from UTD using React, Next.js, and Chart.js.",
     technologies: ["React", "Next.js", "Chart.js", "TypeScript"]
   },
   {
     company: "ACM Research at UTD",
     role: "Student Researcher",
-    period: "2024",
+    period: "Jan 2025 - May 2025",
     summary: "Developed AI models (VAE and VQGAN) to generate synthetic astronomical images to address data scarcity in space research.",
     technologies: ["TensorFlow", "Python", "Deep Learning"]
   }
@@ -35,7 +35,7 @@ export default function ExperienceSection() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="w-full max-w-7xl mx-auto"
     >
       <div className="text-center mb-12">
@@ -43,7 +43,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="text-3xl sm:text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3"
         >
           <Briefcase className="w-8 h-8 text-primary" />
@@ -53,7 +53,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
           className="text-lg text-gray-300 max-w-2xl mx-auto"
         >
           From neuroscience research to software engineering, exploring the intersection of AI and real-world applications
@@ -67,7 +67,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            transition={{ duration: 0.3, delay: index * 0.05 }}
           >
             <Card className="h-full hover:border-primary/30 transition-all duration-300">
               <div className="flex items-start justify-between mb-3">
@@ -112,7 +112,7 @@ export default function ExperienceSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
         className="text-center"
       >
         <Link

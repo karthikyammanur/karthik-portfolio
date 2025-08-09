@@ -26,7 +26,7 @@ export default function AboutSection() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="w-full"
     >
       <Card className="text-center">
@@ -81,7 +81,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
+              transition={{ duration: 0.25, delay: 0.05 * index }}
               className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-4 flex flex-col items-center gap-2 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
             >
               <span className="text-3xl">{skill.icon}</span>

@@ -36,7 +36,7 @@ const experiences: Experience[] = [
     id: 2,
     company: "Cohort Science",
     role: "Software Engineering Intern",
-    period: "2024",
+    period: " March 2025 - May 2025",
     summary: "Prototyped a dashboard UI to visualize ANN-generated research insights from UTD.",
     highlights: [
       "Built a modular FilterSearch component with React Hooks, Next.js, and Chart.js for dynamic filtering",
@@ -51,7 +51,7 @@ const experiences: Experience[] = [
     id: 3,
     company: "ACM Research at UTD",
     role: "Student Researcher",
-    period: "2024",
+    period: "January 2025 - May 2025",
     summary: "Developed AI models to generate synthetic astronomical images to address data scarcity.",
     highlights: [
       "Built VAE and VQGAN models from scratch using TensorFlow, NumPy, and Matplotlib",
@@ -65,7 +65,7 @@ const experiences: Experience[] = [
     id: 4,
     company: "UT Dallas",
     role: "Student Researcher",
-    period: "2023-2024",
+    period: "October 2024- May 2025",
     summary: "Analyzed student-drawn concept maps to measure engineering identity.",
     highlights: [
       "Processed 500+ hand-drawn maps into a clean, structured dataset",
@@ -79,7 +79,7 @@ const experiences: Experience[] = [
     id: 5,
     company: "Emergence AI",
     role: "AI Research Intern",
-    period: "2023",
+    period: "Sept 2023- April 2024",
     summary: "Evaluated GPT-3.5 and GPT-4 for data analysis capabilities on large tabular datasets.",
     highlights: [
       "Designed evaluation prompts and test datasets up to 3,900 rows",
@@ -106,7 +106,7 @@ function ExperienceCard({ experience, isLeft, index }: ExperienceCardProps) {
       initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
       className={`relative w-full lg:w-5/12 ${isLeft ? 'lg:mr-auto lg:pr-8' : 'lg:ml-auto lg:pl-8'}`}
     >
       {/* Timeline connector line - Desktop */}
@@ -135,7 +135,7 @@ function ExperienceCard({ experience, isLeft, index }: ExperienceCardProps) {
             </div>
             <motion.div
               animate={{ rotate: isExpanded ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.15 }}
             >
               <ChevronDown className="w-5 h-5 text-gray-400" />
             </motion.div>
@@ -162,7 +162,7 @@ function ExperienceCard({ experience, isLeft, index }: ExperienceCardProps) {
         <motion.div
           initial={false}
           animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           className="overflow-hidden"
         >
           <div className="pt-4 border-t border-white/10">
@@ -173,7 +173,7 @@ function ExperienceCard({ experience, isLeft, index }: ExperienceCardProps) {
                   key={highlightIndex}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: isExpanded ? 1 : 0, x: isExpanded ? 0 : -10 }}
-                  transition={{ duration: 0.2, delay: highlightIndex * 0.05 }}
+                  transition={{ duration: 0.15, delay: highlightIndex * 0.03 }}
                   className="text-sm text-gray-300 flex items-start gap-2"
                 >
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
@@ -206,7 +206,7 @@ export default function Timeline() {
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
                 className="w-4 h-4 bg-primary rounded-full border-4 border-black"
               />
             </div>
@@ -217,7 +217,7 @@ export default function Timeline() {
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
                 className="w-4 h-4 bg-primary rounded-full border-4 border-black"
               />
             </div>
