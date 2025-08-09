@@ -9,14 +9,14 @@ const skills = [
   { name: "Python", icon: <FaPython className="text-yellow-400" /> },
   { name: "C++", icon: <SiCplusplus className="text-blue-400" /> },
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-  { name: "React", icon: <FaReact className="text-white" /> },
+  { name: "React", icon: <FaReact className="text-cyan-400" /> },
   { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
   { name: "TensorFlow", icon: <SiTensorflow className="text-orange-400" /> },
   { name: "Tailwind", icon: <SiTailwindcss className="text-sky-400" /> },
   { name: "FastAPI", icon: <SiFastapi className="text-green-400" /> },
   { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
   { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
-  { name: "GitHub", icon: <FaGithub className="text-white" /> },
+  { name: "GitHub", icon: <FaGithub className="text-gray-300" /> },
   { name: "Database", icon: <FaDatabase className="text-purple-400" /> },
 ];
 
@@ -74,18 +74,38 @@ export default function AboutSection() {
           <Code className="w-5 h-5 text-white" />
           Skills & Technologies
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {skills.map((skill, index) => (
             <motion.div 
               key={skill.name} 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.25, delay: 0.05 * index }}
-              className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-4 flex flex-col items-center gap-2 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ 
+                duration: 0.2, 
+                delay: index * 0.03,
+                ease: "easeOut"
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -2,
+                transition: { duration: 0.15 }
+              }}
+              whileTap={{ 
+                scale: 0.95,
+                transition: { duration: 0.1 }
+              }}
+              className="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/10 p-3 sm:p-4 flex flex-col items-center gap-2 hover:bg-white/10 hover:border-white/20 transition-all duration-200 cursor-pointer group"
             >
-              <span className="text-3xl">{skill.icon}</span>
-              <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
+              <motion.span 
+                className="text-2xl sm:text-3xl transition-transform duration-200 group-hover:scale-110"
+                initial={{ rotate: -10 }}
+                animate={{ rotate: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.03 + 0.1 }}
+              >
+                {skill.icon}
+              </motion.span>
+              <span className="text-xs sm:text-sm text-gray-300 font-medium text-center leading-tight">{skill.name}</span>
             </motion.div>
           ))}
         </div>

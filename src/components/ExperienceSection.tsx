@@ -22,7 +22,7 @@ const featuredExperiences = [
   },
   {
     company: "ACM Research at UTD",
-    role: "Student Researcher",
+    role: "Machine Learning Researcher",
     period: "Jan 2025 - May 2025",
     summary: "Developed AI models (VAE and VQGAN) to generate synthetic astronomical images to address data scarcity in space research.",
     technologies: ["TensorFlow", "Python", "Deep Learning"]
