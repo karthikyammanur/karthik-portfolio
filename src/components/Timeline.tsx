@@ -50,7 +50,7 @@ const experiences: Experience[] = [
   {
     id: 3,
     company: "ACM Research at UTD",
-    role: "Student Researcher",
+    role: "Machine Learning Researcher",
     period: "January 2025 - May 2025",
     summary: "Developed AI models to generate synthetic astronomical images to address data scarcity.",
     highlights: [
@@ -63,15 +63,15 @@ const experiences: Experience[] = [
   },
   {
     id: 4,
-    company: "UT Dallas",
-    role: "Student Researcher",
+    company: "UT-Design Research Lab - UT Dallas",
+    role: "Undergraduate Student Researcher",
     period: "October 2024- May 2025",
-    summary: "Analyzed student-drawn concept maps to measure engineering identity.",
+    summary: "Analyzed student-drawn concept maps to measure engineering identity - Worked under Dr. Pavan Kumar and Dr. Joshua Summers",
     highlights: [
       "Processed 500+ hand-drawn maps into a clean, structured dataset",
       "Extracted graph features such as node count, edge density, and clustering coefficients",
       "Prepared data for ANN training and analysis",
-      "Work directly contributed to Cohort Science's national academic insights dashboard partnership"
+      "Work contributed to Cohort Science's partnership"
     ],
     technologies: ["Python", "Data Analysis", "Graph Theory", "Machine Learning"]
   },
@@ -86,7 +86,7 @@ const experiences: Experience[] = [
       "Implemented chunking mechanism to bypass token limits",
       "Measured accuracy in trend identification, statistical analysis, and anomaly detection",
       "Diagnosed LLM failure modes (hallucinations, memory leaks, schema errors)",
-      "Presented weekly findings and recommended workflow improvements"
+      "Presented weekly findings and recommended workflow improvements to supervisors"
     ],
     technologies: ["GPT-3.5", "GPT-4", "Python", "Data Analysis", "LLM Evaluation"]
   }
