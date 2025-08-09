@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Brain, Code, Cpu, Database, Sparkles } from "lucide-react";
+import { Brain, Code, Cpu, Database, Sparkles, Github as GitHubIcon, Linkedin, Mail } from "lucide-react";
 import { FaPython, FaReact, FaNodeJs, FaGithub, FaDatabase } from "react-icons/fa";
 import { SiCplusplus, SiTensorflow, SiFastapi, SiTypescript, SiTailwindcss, SiJavascript, SiNextdotjs } from "react-icons/si";
 import Card from "./Card";
@@ -34,9 +34,42 @@ export default function AboutSection() {
           <Brain className="w-8 h-8 text-white" />
           About Me
         </h2>
-        <p className="text-base sm:text-lg text-gray-300 mb-8 leading-relaxed">
+        <p className="text-base sm:text-lg text-gray-300 mb-6 leading-relaxed">
           I&apos;m a Computer Engineering student at UT Dallas focused on building impactful tools with AI. I&apos;ve worked on research projects involving generative models like VAEs and VQGANs, energy optimization systems using LSTM networks, and AI summarization pipelines using Gemini and FastAPI. Whether it&apos;s decoding space data or building usable dashboards, I love blending logic with creativity.
         </p>
+        
+        {/* Social Links - Hidden on Home Page */}
+        <div className="hidden lg:hidden mb-6 justify-center gap-6">
+          <motion.a
+            href="mailto:karthikyam2006@gmail.com"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="text-gray-400 hover:text-primary transition-colors"
+          >
+            <Mail className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="https://github.com/karthikyammanur"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="text-gray-400 hover:text-primary transition-colors"
+          >
+            <GitHubIcon className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/karthik-yammanur/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="text-gray-400 hover:text-primary transition-colors"
+          >
+            <Linkedin className="w-6 h-6" />
+          </motion.a>
+        </div>
+        
         <h3 className="font-semibold text-white mb-6 flex items-center justify-center gap-2">
           <Code className="w-5 h-5 text-white" />
           Skills & Technologies
