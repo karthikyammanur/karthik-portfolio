@@ -2,11 +2,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, FolderOpen, Mail, Menu, Code } from "lucide-react";
+import { Home, User, FolderOpen, Mail, Menu, Code, Briefcase } from "lucide-react";
 
 const navLinks = [
 	{ name: "Home", href: "/", icon: Home },
 	{ name: "Projects", href: "/projects", icon: FolderOpen },
+	{ name: "Experience", href: "/experience", icon: Briefcase },
 	{ name: "Contact", href: "/contact", icon: Mail },
 ];
 
