@@ -49,16 +49,16 @@ const allProjects = [
       "This is a custom-built full-stack website created for my mom's Kuchipudi dance school using the MERN stack. The frontend was developed in React and styled with Tailwind CSS, enhanced by animations from Framer Motion and AOS. It includes features like a testimonial carousel, dynamic routing, and a floating chat modal. On the backend, Express and MongoDB handle form submissions and data management. The site is fully mobile-responsive and branded with Indian cultural motifs to reflect the school's identity.",
     techStack: ["React", "Node.js", "MongoDB", "Express", "Tailwind", "Framer Motion"],
     githubLink: "https://github.com/karthikyammanur/sai-meghna-dance-school",
-    imageSrc: "/globe.svg",
+    imageSrc: "/dance_school_image.jpg",
   },
   {
     title: "SignLang AI – HackUTD 2024",
     description:
       "SignLang AI is a real-time American Sign Language (ASL) translator built for HackUTD 2024. Using TensorFlow and OpenCV, it recognizes all 26 alphabet signs from live webcam input and translates them directly in the browser. The model achieves high accuracy and runs seamlessly within a custom UI, making it accessible for real-time communication and educational use.",
     techStack: ["TensorFlow", "OpenCV", "JavaScript", "Python", "HTML/CSS"],
-    githubLink: "https://github.com/karthikyammanur/signlang-ai",
+    githubLink: "https://github.com/Traman2/SignlangAI",
     liveLink: "https://www.youtube.com/watch?v=QW0eGGjECCA&t=13s",
-    imageSrc: "/globe.svg",
+    imageSrc: "/signlang_image.png",
   },
 ];
 
