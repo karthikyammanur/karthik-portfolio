@@ -20,7 +20,7 @@ import Link from "next/link";
 			timeout = setTimeout(() => {
 				setDisplayed((prev) => prev + typingPhrases[0][index]);
 				setIndex(index + 1);
-			}, 40);
+			}, 25);
 		}
 		return () => clearTimeout(timeout);
 	}, [index]);
@@ -38,7 +38,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 40 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.8, ease: "easeOut" }}
+				transition={{ duration: 0.4, ease: "easeOut" }}
 				className="min-h-[90vh] w-full px-4 py-16 flex items-center justify-center"
 			>
 				<div className="w-full max-w-7xl flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">

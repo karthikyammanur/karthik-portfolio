@@ -13,7 +13,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.35 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"
         >
           {/* About Section */}
@@ -85,7 +85,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.35, delay: 0.15 }}
         >
           <Card className="text-center py-4">
             <p className="text-gray-400 text-sm flex items-center justify-center gap-2">

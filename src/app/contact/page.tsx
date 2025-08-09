@@ -57,7 +57,7 @@ export default function ContactPage() {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
         className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6"
       >
         <MessageSquare className="text-primary text-2xl" />
@@ -66,7 +66,7 @@ export default function ContactPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        transition={{ duration: 0.35, delay: 0.1 }}
         className="flex gap-6 mb-10"
       >
         <a
@@ -98,7 +98,7 @@ export default function ContactPage() {
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.35, delay: 0.2 }}
           className="flex flex-col gap-5"
           onSubmit={handleSubmit}
         >

@@ -57,7 +57,7 @@ export default function ProjectsSection() {
 				initial={{ opacity: 0 }}
 				whileInView={{ opacity: 1 }}
 				viewport={{ once: true, amount: 0.2 }}
-				transition={{ duration: 0.8, delay: 0.2 }}
+				transition={{ duration: 0.4, delay: 0.1 }}
 				className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
 			>
 				{projects.map((project, index) => (
@@ -67,8 +67,8 @@ export default function ProjectsSection() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.3 }}
 						transition={{ 
-							duration: 0.6, 
-							delay: index * 0.1,
+							duration: 0.3, 
+							delay: index * 0.05,
 							ease: "easeOut"
 						}}
 					>
@@ -82,7 +82,7 @@ export default function ProjectsSection() {
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, amount: 0.5 }}
-				transition={{ duration: 0.6, delay: 0.4 }}
+				transition={{ duration: 0.3, delay: 0.2 }}
 				className="text-center mt-16"
 			>
 				<Link
