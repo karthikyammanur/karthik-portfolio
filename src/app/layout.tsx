@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
+import { Analytics } from "@vercel/analytics/next"
 
 const tomorrow = Tomorrow({
   variable: "--font-tomorrow",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="min-h-screen px-4 pt-20">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
