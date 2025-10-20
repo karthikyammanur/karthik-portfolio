@@ -1,0 +1,36 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="edutubeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff0000;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ff0000;stop-opacity:0.2" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#000000"/>
+  
+  <!-- Grid Pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ff0000" stroke-width="0.5" opacity="0.3"/>
+  </pattern>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  
+  <!-- Main Content -->
+  <rect x="100" y="150" width="600" height="300" fill="url(#edutubeGradient)" stroke="#ff0000" stroke-width="2" filter="url(#glow)" opacity="0.8"/>
+  
+  <!-- Video Play Icon -->
+  <circle cx="400" cy="300" r="60" fill="none" stroke="#ff0000" stroke-width="3" filter="url(#glow)"/>
+  <polygon points="370,270 370,330 430,300" fill="#ff0000" filter="url(#glow)"/>
+  
+  <!-- Text -->
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="48" fill="#ff0000" text-anchor="middle" filter="url(#glow)" font-weight="bold">EduTube</text>
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="20" fill="#00ffff" text-anchor="middle" opacity="0.8">AI Lecture Companion</text>
+</svg>

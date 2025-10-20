@@ -56,39 +56,71 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Main cursor dot */}
+      {/* Main cursor triangle with tail */}
       <div
         className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
         style={{
-          transform: `translate3d(${mousePosition.x - 6}px, ${mousePosition.y - 6}px, 0)`,
+          transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0) rotate(-40deg)`,
           opacity: isVisible ? 1 : 0,
         }}
       >
+        {/* Triangle */}
         <div
-          className="w-3 h-3 rounded-full"
+          className="w-0 h-0"
           style={{
+            borderLeft: '8px solid transparent',
+            borderRight: '8px solid transparent',
+            borderBottom: '14px solid #ff2e2e',
+            filter: `
+              drop-shadow(0 0 8px #ff2e2e)
+              drop-shadow(0 0 16px #ff2e2e)
+              drop-shadow(0 0 24px rgba(255, 46, 46, 0.4))
+            `,
+          }}
+        />
+        {/* Tail/Stick */}
+        <div
+          style={{
+            width: '2px',
+            height: '8px',
             background: '#ff2e2e',
-            boxShadow: `
-              0 0 8px #ff2e2e,
-              0 0 16px #ff2e2e,
-              0 0 24px rgba(255, 46, 46, 0.4)
+            marginLeft: '7px',
+            marginTop: '-1px',
+            filter: `
+              drop-shadow(0 0 4px #ff2e2e)
+              drop-shadow(0 0 8px #ff2e2e)
             `,
           }}
         />
       </div>
 
-      {/* Outer glow ring */}
+      {/* Outer glow triangle with tail */}
       <div
         className="fixed top-0 left-0 pointer-events-none z-[9998] will-change-transform"
         style={{
-          transform: `translate3d(${mousePosition.x - 12}px, ${mousePosition.y - 12}px, 0)`,
-          opacity: isVisible ? 0.5 : 0,
+          transform: `translate3d(${mousePosition.x - 4}px, ${mousePosition.y - 4}px, 0) rotate(-40deg)`,
+          opacity: isVisible ? 0.4 : 0,
         }}
       >
+        {/* Triangle */}
         <div
-          className="w-6 h-6 rounded-full border border-red-500/30"
+          className="w-0 h-0"
           style={{
-            boxShadow: '0 0 12px rgba(255, 46, 46, 0.2)',
+            borderLeft: '12px solid transparent',
+            borderRight: '12px solid transparent',
+            borderBottom: '20px solid rgba(255, 46, 46, 0.3)',
+            filter: 'drop-shadow(0 0 12px rgba(255, 46, 46, 0.2))',
+          }}
+        />
+        {/* Tail/Stick */}
+        <div
+          style={{
+            width: '3px',
+            height: '12px',
+            background: 'rgba(255, 46, 46, 0.3)',
+            marginLeft: '10.5px',
+            marginTop: '-1px',
+            filter: 'drop-shadow(0 0 6px rgba(255, 46, 46, 0.2))',
           }}
         />
       </div>

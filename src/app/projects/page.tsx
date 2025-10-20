@@ -1,12 +1,29 @@
 "use client";
+import { useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
-import { motion } from "framer-motion";
-import { FaCode, FaRocket, FaGithub } from "react-icons/fa";
+import ProjectListItem from "@/components/ProjectListItem";
+import { FaCode, FaRocket, FaGithub, FaList, FaTh } from "react-icons/fa";
 import Card from "@/components/Card";
 
 // All projects including featured and additional ones
 const allProjects = [
   // Featured Projects (from home page)
+  {
+    title: "AgentFlow",
+    description:
+      "Full-stack AI agent deployment platform currently in development, featuring secure sandboxed execution with VM2 and child processes, real-time monitoring, and one-click deployments. Architected with Next.js, Prisma ORM, and GitHub OAuth, implementing strict timeouts, memory limits, and security scanning to safely run untrusted JavaScript and Python code. Built responsive dashboard with Gemini AI chat integration achieving 3-8s response times and modular component architecture for scalable agent management.",
+    techStack: ["Next.js", "TypeScript", "Prisma", "NextAuth.js", "Gemini API", "VM2"],
+    imageSrc: "/agentflow_image.png",
+  },
+  {
+    title: "EduTube",
+    description:
+      "AI-powered lecture companion built at HackRice 2025 that transforms video lectures into interactive study materials. Features semantic search through video content, auto-generated study notes, quiz questions and flashcards, and timestamp navigation. Built with React, Fastify, TwelveLabs for video understanding, and Gemini for content generation, enabling students to efficiently learn from any lecture video.",
+    techStack: ["React", "Vite", "TypeScript", "Fastify", "TwelveLabs", "Gemini API", "Google Cloud"],
+    githubLink: "https://github.com/karthikyammanur/edutube-hackrice-2025",
+    liveLink: "https://www.youtube.com/watch?v=-R1D8gmRfco",
+    imageSrc: "/edutube_image.png",
+  },
   {
     title: "NEWT",
     description:
@@ -63,42 +80,24 @@ const allProjects = [
 ];
 
 export default function Projects() {
+  const [viewMode, setViewMode] = useState<"list" | "cards">("list");
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center px-4 py-20 lg:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold"
-          >
-            <FaCode className="text-primary text-2xl sm:text-3xl" />
-            <span className="text-primary">Project Showcase</span>
-          </motion.h1>
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="inline-flex items-center gap-4 glass-card neon-border-subtle rounded-3xl px-8 py-4 mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold">
+            <FaCode className="neon-text-subtle text-2xl sm:text-3xl" />
+            <span className="neon-text-subtle">Project Showcase</span>
+          </h1>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.2 }}
-            className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed"
-          >
+          <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
             A collection of projects showcasing my expertise in AI, web development, 
             and full-stack solutions. From machine learning models to production applications.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.25 }}
-            className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400"
-          >
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <FaRocket className="text-white" />
               <span>Production Ready</span>
@@ -111,53 +110,66 @@ export default function Projects() {
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span>Actively Maintained</span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
 
-      {/* Projects Grid Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="w-full max-w-7xl mx-auto px-4 py-16"
-      >
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10"
-        >
-          {allProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ 
-                duration: 0.3, 
-                delay: index * 0.05,
-                ease: "easeOut"
-              }}
+      {/* View Toggle */}
+      <section className="w-full max-w-7xl mx-auto px-4 mb-8">
+        <div className="flex justify-center">
+          <div className="glass-card neon-border-subtle rounded-2xl p-1 flex gap-1">
+            <button
+              onClick={() => setViewMode("list")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+                viewMode === "list"
+                  ? "bg-red-500/20 neon-border text-white"
+                  : "text-gray-400 hover:text-white hover:bg-red-500/10"
+              }`}
             >
-              <ProjectCard {...project} />
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
+              <FaList className="w-4 h-4" />
+              <span className="font-medium">List View</span>
+            </button>
+            <button
+              onClick={() => setViewMode("cards")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+                viewMode === "cards"
+                  ? "bg-red-500/20 neon-border text-white"
+                  : "text-gray-400 hover:text-white hover:bg-red-500/10"
+              }`}
+            >
+              <FaTh className="w-4 h-4" />
+              <span className="font-medium">Card View</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Display */}
+      <section className="w-full max-w-7xl mx-auto px-4 py-8">
+        {viewMode === "list" ? (
+          // List View
+          <div className="flex flex-col gap-4">
+            {allProjects.map((project) => (
+              <ProjectListItem key={project.title} project={project} />
+            ))}
+          </div>
+        ) : (
+          // Card View
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
+            {allProjects.map((project) => (
+              <div key={project.title}>
+                <ProjectCard {...project} />
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* Call to Action Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.4 }}
-        className="px-4 py-20 lg:py-32"
-      >
+      <section className="px-4 py-20 lg:py-32">
         <div className="max-w-4xl mx-auto text-center">
           <Card className="p-8 lg:p-12">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 neon-text-subtle">
               Let&apos;s Build Something Amazing
             </h3>
             <p className="text-gray-300 text-lg mb-8 leading-relaxed">
@@ -165,30 +177,26 @@ export default function Projects() {
               I&apos;m always excited to work on innovative solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
+              <a
                 href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10"
+                className="glossy-button inline-flex items-center justify-center gap-2"
               >
                 Get In Touch
                 <FaRocket className="text-lg" />
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="https://github.com/karthikyammanur"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10"
+                className="glossy-button inline-flex items-center justify-center gap-2"
               >
                 View All Projects
                 <FaGithub className="text-lg" />
-              </motion.a>
+              </a>
             </div>
           </Card>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }
