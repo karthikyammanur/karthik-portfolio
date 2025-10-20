@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Rocket, Sparkles, Github, Linkedin, Mail } from "lucide-react";
+import { Sparkles, Github, Linkedin, Mail } from "lucide-react";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import Link from "next/link";
+import Image from "next/image";
 
 	const typingPhrases = [
 		"computer engineering @ ut dallas • aspiring AI/ML researcher",
@@ -35,102 +34,65 @@ import Link from "next/link";
 export default function Home() {
 	return (
 		<>
-			<motion.section
-				initial={{ opacity: 0, y: 40 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.4, ease: "easeOut" }}
-				className="min-h-[90vh] w-full px-4 py-16 flex items-center justify-center"
-			>
-				<div className="w-full max-w-7xl flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-					{/* Left Column - Main Content */}
-					<div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
-						<div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 w-full">
-							{/* Title and Typing Animation */}
-							<div className="flex-1 flex flex-col items-center lg:items-start">
-								<h1 className="text-3xl sm:text-5xl font-bold mb-4 glitch-subtle flex items-center justify-center lg:justify-start gap-3">
-									I&apos;m Karthik Yammanur
-									<Rocket className="w-10 h-10 sm:w-14 sm:h-14 text-white" />
-								</h1>
-								
-								{/* Portrait Image - Mobile */}
-								<div className="relative w-40 h-40 mb-4 lg:hidden">
-									<motion.div
-										whileHover={{ scale: 1.05 }}
-										className="w-full h-full rounded-full overflow-hidden border-2 border-primary relative group"
-									>
-										<Image 
-											src="/portrait_image.jpg" 
-											alt="Karthik Yammanur" 
-											fill
-											style={{ objectFit: 'cover' }}
-											className="rounded-full"
-										/>
-										<div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-									</motion.div>
-									<div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/20 rounded-full blur-sm -z-10"></div>
-								</div>
-								
-								<TypingAnimation />
-								
-								{/* Social Links */}
-								<div className="flex justify-center lg:justify-start gap-6 mt-4">
-									<motion.a
-										href="mailto:karthikyam2006@gmail.com"
-										whileHover={{ scale: 1.1 }}
-										whileTap={{ scale: 0.9 }}
-										className="text-gray-400 hover:text-primary transition-colors"
-									>
-										<Mail className="w-6 h-6" />
-									</motion.a>
-									<motion.a
-										href="https://github.com/karthikyammanur"
-										target="_blank"
-										rel="noopener noreferrer"
-										whileHover={{ scale: 1.1 }}
-										whileTap={{ scale: 0.9 }}
-										className="text-gray-400 hover:text-primary transition-colors"
-									>
-										<Github className="w-6 h-6" />
-									</motion.a>
-									<motion.a
-										href="https://www.linkedin.com/in/karthik-yammanur/"
-										target="_blank"
-										rel="noopener noreferrer"
-										whileHover={{ scale: 1.1 }}
-										whileTap={{ scale: 0.9 }}
-										className="text-gray-400 hover:text-primary transition-colors"
-									>
-										<Linkedin className="w-6 h-6" />
-									</motion.a>
-								</div>
-							</div>
-							
-							{/* Portrait Image - Desktop (Side by side with title) */}
-							<div className="relative w-48 h-48 flex-shrink-0 hidden lg:block">
-								<motion.div
-									whileHover={{ scale: 1.05 }}
-									className="w-full h-full rounded-full overflow-hidden border-2 border-primary relative group"
-								>
-									<Image 
-										src="/portrait_image.jpg" 
-										alt="Karthik Yammanur" 
-										fill
-										style={{ objectFit: 'cover' }}
-										className="rounded-full"
-									/>
-									<div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-								</motion.div>
-								<div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/20 rounded-full blur-sm -z-10"></div>
-							</div>
+			<section className="min-h-[90vh] w-full px-4 py-16 flex items-center justify-center">
+				<div className="w-full max-w-[95vw] flex flex-col lg:flex-row gap-8 items-center">
+			{/* Left Column - Name, Title, and Links (Compact) */}
+			<div className="lg:w-[35%] flex flex-col items-center lg:items-start text-center lg:text-left">
+				{/* Name with Portrait Icon */}
+				<div className="flex items-center gap-4 mb-4">
+					{/* Portrait Image - Icon Size */}
+					<div className="relative flex-shrink-0">
+						<div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl overflow-hidden neon-border-subtle shadow-[0_0_20px_rgba(255,0,0,0.3)]">
+							<Image
+								src="/portrait_image.png"
+								alt="Karthik Yammanur"
+								fill
+								className="object-cover"
+								priority
+							/>
+						</div>
+						{/* Glow effect */}
+						<div className="absolute inset-0 rounded-2xl bg-red-500/10 blur-lg -z-10"></div>
+					</div>
+					
+					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+						I&apos;m Karthik Yammanur
+					</h1>
+				</div>						<TypingAnimation />
+						
+						{/* Social Links */}
+						<div className="flex justify-center lg:justify-start gap-6 mt-6">
+							<a
+								href="mailto:karthikyam2006@gmail.com"
+								className="text-gray-400 hover:text-primary hover:scale-110 transition-all duration-300"
+							>
+								<Mail className="w-6 h-6" />
+							</a>
+							<a
+								href="https://github.com/karthikyammanur"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-gray-400 hover:text-primary hover:scale-110 transition-all duration-300"
+							>
+								<Github className="w-6 h-6" />
+							</a>
+							<a
+								href="https://www.linkedin.com/in/karthik-yammanur/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-gray-400 hover:text-primary hover:scale-110 transition-all duration-300"
+							>
+								<Linkedin className="w-6 h-6" />
+							</a>
 						</div>
 					</div>
 					
-					{/* Right Column - About Section */}
-					<div className="flex-1 w-full">
+					{/* Right Column - Large Möbius Strip (Takes up most of the space) */}
+					<div className="lg:w-[65%] w-full">
 						<AboutSection />
 					</div>
 				</div>
-			</motion.section>
+			</section>
 			<section className="py-20 px-6">
 				<ProjectsSection />
 			</section>

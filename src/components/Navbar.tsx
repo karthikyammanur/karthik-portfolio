@@ -16,27 +16,28 @@ export default function Navbar() {
 	const pathname = usePathname();
 
 	return (
-		<nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl flex justify-between items-center px-8 py-4 rounded-full bg-[#111]/30 backdrop-blur-md border border-white/10 shadow-lg shadow-red-500/10 hover:shadow-red-500/30 hover:border-red-400/40 transition-all duration-300">
+		<nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-5xl glass-card rounded-2xl px-8 py-4 flex justify-between items-center">
 			{/* Logo/Name */}
 			<Link
 				href="/"
-				className="text-white font-mono text-xl font-bold tracking-wider select-none uppercase flex items-center gap-3"
+				className="neon-text-subtle font-mono text-xl font-bold tracking-wider select-none uppercase flex items-center gap-3 transition-all duration-300 hover:neon-text"
 			>
-				<Code className="w-7 h-7 text-white" />
+				<Code className="w-7 h-7" />
 				Karthik Yammanur
 			</Link>
 			{/* Desktop nav */}
-			<ul className="hidden md:flex gap-8 text-gray-300 font-mono text-base">
+			<ul className="hidden md:flex gap-8 font-mono text-base">
 				{navLinks.map((link) => {
 					const IconComponent = link.icon;
+					const isActive = pathname === link.href;
 					return (
 						<li key={link.name}>
 							<Link
 								href={link.href}
-								className={`uppercase tracking-wide transition-colors hover:text-primary flex items-center gap-2 py-2 ${
-									pathname === link.href
-										? "text-primary"
-										: "text-gray-300"
+								className={`uppercase tracking-wide transition-all duration-300 flex items-center gap-2 py-2 ${
+									isActive
+										? "text-primary neon-text-subtle"
+										: "text-gray-300 hover:text-primary hover:neon-text-subtle"
 								}`}
 							>
 								<IconComponent className="w-5 h-5" />
@@ -48,7 +49,7 @@ export default function Navbar() {
 			</ul>
 			{/* Hamburger for mobile */}
 			<button
-				className="md:hidden p-3 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+				className="md:hidden p-3 rounded transition-all duration-300 hover:text-primary focus:outline-none neon-border-subtle"
 				onClick={() => setMenuOpen((v) => !v)}
 				aria-label="Toggle menu"
 			>
@@ -58,17 +59,18 @@ export default function Navbar() {
 			{/* Mobile menu dropdown */}
 			{menuOpen && (
 				<div className="absolute top-full left-0 right-0 mt-2 md:hidden">
-					<div className="bg-[#111]/90 backdrop-blur-md border border-white/10 rounded-2xl mx-4 py-6 shadow-lg">
+					<div className="glass-card rounded-2xl mx-4 py-6">
 						{navLinks.map((link) => {
 							const IconComponent = link.icon;
+							const isActive = pathname === link.href;
 							return (
 								<Link
 									key={link.name}
 									href={link.href}
-									className={`block px-8 py-3 font-mono text-base uppercase tracking-wide transition-colors hover:text-primary flex items-center gap-3 ${
-										pathname === link.href
-											? "text-primary"
-											: "text-gray-300"
+									className={`block px-8 py-3 font-mono text-base uppercase tracking-wide transition-all duration-300 flex items-center gap-3 ${
+										isActive
+											? "text-primary neon-text-subtle"
+											: "text-gray-300 hover:text-primary hover:neon-text-subtle"
 									}`}
 									onClick={() => setMenuOpen(false)}
 								>

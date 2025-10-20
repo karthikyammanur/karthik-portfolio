@@ -1,0 +1,345 @@
+"use client";
+import React from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the 3D component with no SSR
+const MobiusStrip3D = dynamic(() => import('./MobiusStrip3D'), { 
+  ssr: false,
+  loading: () => (
+    <div className="glass-card rounded-xl overflow-hidden mb-8 flex items-center justify-center" style={{ height: '600px' }}>
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+        <p className="text-gray-400">Loading 3D Experience...</p>
+      </div>
+    </div>
+  )
+});
+
+// Import skills data
+import { skills } from './MobiusStrip3D';
+
+// Constants
+const SPEED = 0.3;
+const TRAIL_LENGTH = 15; // Reduced from 30
+const STRIP_SEGMENTS = 100; // Reduced from 200 for faster loading
+const RADIUS = 3;
+const WIDTH = 0.8;
+
+// Skills data
+const skills = [
+  { name: "React", icon: SiReact, color: '#61dafb' },
+  { name: "TypeScript", icon: SiTypescript, color: '#3178c6' },
+  { name: "Python", icon: SiPython, color: '#3776ab' },
+  { name: "TensorFlow", icon: SiTensorflow, color: '#ff6f00' },
+  { name: "PyTorch", icon: SiPytorch, color: '#ee4c2c' },
+  { name: "Next.js", icon: SiNextdotjs, color: '#ffffff' },
+  { name: "Node.js", icon: SiNodedotjs, color: '#339933' },
+  { name: "Tailwind CSS", icon: SiTailwindcss, color: '#06b6d4' },
+  { name: "Git", icon: SiGit, color: '#f05032' },
+  { name: "C++", icon: SiCplusplus, color: '#00599c' },
+  { name: "JavaScript", icon: SiJavascript, color: '#f7df1e' },
+  { name: "AWS", icon: SiAmazon, color: '#ff9900' },
+];
+
+// Generate Möbius strip geometry
+function generateMobiusGeometry(radius: number, width: number, segments: number) {
+  const positions: number[] = [];
+  const indices: number[] = [];
+  
+  for (let i = 0; i <= segments; i++) {
+    const u = (i / segments) * Math.PI * 2;
+    
+    for (let j = 0; j <= 1; j++) {
+      const v = (j - 0.5) * width;
+      
+      const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
+      const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
+      const z = v * Math.sin(u / 2);
+      
+      positions.push(x, y, z);
+    }
+  }
+  
+  for (let i = 0; i < segments; i++) {
+    const a = i * 2;
+    const b = a + 1;
+    const c = a + 2;
+    const d = a + 3;
+    
+    indices.push(a, b, c);
+    indices.push(b, d, c);
+  }
+  
+  return { positions: new Float32Array(positions), indices: new Uint16Array(indices) };
+}
+
+// Get position on Möbius strip
+function getMobiusPosition(t: number, radius: number, offset: number = 0) {
+  if (typeof window === 'undefined' || !THREE) return { x: 0, y: 0, z: 0 };
+  
+  const u = t * Math.PI * 2;
+  const v = offset;
+  
+  const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
+  const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
+  const z = v * Math.sin(u / 2);
+  
+  return new THREE.Vector3(x, y, z);
+}
+
+// Get tangent vector
+function getMobiusTangent(t: number, radius: number) {
+  const u = t * Math.PI * 2;
+  const du = 0.01;
+  
+  const p1 = getMobiusPosition(t, radius, 0);
+  const p2 = getMobiusPosition(t + du, radius, 0);
+  
+  return p2.clone().sub(p1).normalize();
+}
+
+// Möbius Strip Component
+function MobiusStrip() {
+  const geometry = useMemo(() => generateMobiusGeometry(RADIUS, WIDTH, STRIP_SEGMENTS), []);
+  
+  const edge1Points = useMemo(() => {
+    const points = [];
+    for (let i = 0; i <= STRIP_SEGMENTS; i++) {
+      const t = i / STRIP_SEGMENTS;
+      points.push(getMobiusPosition(t, RADIUS, 0.4));
+    }
+    return points;
+  }, []);
+  
+  const edge2Points = useMemo(() => {
+    const points = [];
+    for (let i = 0; i <= STRIP_SEGMENTS; i++) {
+      const t = i / STRIP_SEGMENTS;
+      points.push(getMobiusPosition(t, RADIUS, -0.4));
+    }
+    return points;
+  }, []);
+  
+  const geometryRef = useRef<THREE.BufferGeometry>(null);
+  
+  React.useEffect(() => {
+    if (geometryRef.current) {
+      geometryRef.current.setAttribute('position', new THREE.BufferAttribute(geometry.positions, 3));
+      geometryRef.current.setIndex(new THREE.BufferAttribute(geometry.indices, 1));
+      geometryRef.current.computeVertexNormals();
+    }
+  }, [geometry]);
+  
+  return (
+    <group>
+      <mesh>
+        <bufferGeometry ref={geometryRef} />
+        <meshStandardMaterial
+          color="#0a0a0a"
+          metalness={0.9}
+          roughness={0.3}
+          emissive="#330000"
+          emissiveIntensity={0.3}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+      
+      <Line points={edge1Points} color="#ff0000" lineWidth={3} />
+      <Line points={edge2Points} color="#ff3333" lineWidth={2} />
+    </group>
+  );
+}
+
+// Tron Bike Component
+function TronBike({ t }: { t: number }) {
+  const bikeRef = useRef<THREE.Group>(null);
+  
+  useFrame(() => {
+    if (bikeRef.current) {
+      const pos = getMobiusPosition(t, RADIUS, 0);
+      const tangent = getMobiusTangent(t, RADIUS);
+      
+      bikeRef.current.position.copy(pos);
+      bikeRef.current.lookAt(pos.clone().add(tangent));
+    }
+  });
+  
+  return (
+    <group ref={bikeRef}>
+      {/* Bike body */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.3, 0.15, 0.6]} />
+        <meshStandardMaterial
+          color="#ff0000"
+          emissive="#ff0000"
+          emissiveIntensity={0.8}
+          metalness={0.8}
+          roughness={0.2}
+        />
+      </mesh>
+      
+      {/* Front section */}
+      <mesh position={[0, 0, 0.35]}>
+        <boxGeometry args={[0.2, 0.1, 0.1]} />
+        <meshStandardMaterial
+          color="#cc0000"
+          emissive="#cc0000"
+          emissiveIntensity={0.6}
+        />
+      </mesh>
+      
+      {/* Rear section */}
+      <mesh position={[0, 0, -0.35]}>
+        <boxGeometry args={[0.25, 0.12, 0.1]} />
+        <meshStandardMaterial
+          color="#cc0000"
+          emissive="#cc0000"
+          emissiveIntensity={0.6}
+        />
+      </mesh>
+      
+      {/* Front light */}
+      <pointLight
+        position={[0, 0, 0.5]}
+        color="#ff0000"
+        intensity={2.5}
+        distance={2}
+      />
+      
+      {/* Rear light */}
+      <pointLight
+        position={[0, 0, -0.5]}
+        color="#ff3333"
+        intensity={1.5}
+        distance={1.5}
+      />
+    </group>
+  );
+}
+
+// Light Trail Component
+function LightTrail({ t }: { t: number }) {
+  const points = React.useMemo(() => {
+    const trailPoints = [];
+    const step = Math.floor(t * 100) / 100; // Reduce recalculations
+    for (let i = 0; i < TRAIL_LENGTH; i++) {
+      const offset = (i / TRAIL_LENGTH) * 0.1;
+      const trailT = (step - offset + 1) % 1;
+      trailPoints.push(getMobiusPosition(trailT, RADIUS, 0));
+    }
+    return trailPoints;
+  }, [Math.floor(t * 10)]); // Only update 10 times per second
+  
+  return (
+    <Line
+      points={points}
+      color="#ff0000"
+      lineWidth={2}
+      transparent
+      opacity={0.6}
+    />
+  );
+}
+
+// Skills Icon Component
+function SkillIcon({ skill, index, total }: { skill: typeof skills[0], index: number, total: number }) {
+  const t = index / total;
+  const position = getMobiusPosition(t, RADIUS, 0.5);
+  
+  return (
+    <Html position={[position.x, position.y, position.z]} center>
+      <div className="glass-card neon-border-subtle p-2 backdrop-blur-md" style={{ width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <skill.icon className="w-8 h-8" style={{ color: skill.color }} />
+      </div>
+    </Html>
+  );
+}
+
+// Main Scene Component
+function Scene() {
+  const [t, setT] = React.useState(0);
+  
+  useFrame((state, delta) => {
+    setT((prev) => (prev + delta * SPEED) % 1);
+  });
+  
+  return (
+    <>
+      <color attach="background" args={['#000000']} />
+      <fog attach="fog" args={['#000000', 8, 25]} />
+      
+      <ambientLight intensity={0.2} color="#330000" />
+      <directionalLight position={[5, 5, 5]} intensity={0.3} color="#ff0000" />
+      <directionalLight position={[-5, -5, -5]} intensity={0.2} color="#cc0000" />
+      
+      <MobiusStrip />
+      <TronBike t={t} />
+      <LightTrail t={t} />
+      
+      {skills.map((skill, index) => (
+        <SkillIcon key={skill.name} skill={skill} index={index} total={skills.length} />
+      ))}
+    </>
+  );
+}
+
+// Main AboutSection Component
+export default function AboutSection() {
+  const [isClient, setIsClient] = React.useState(false);
+  
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  return (
+    <div className="w-full py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-2 neon-text">
+          Skills & Technologies
+        </h2>
+        <p className="text-center text-gray-400 mb-8">
+          Powered by cutting-edge tools
+        </p>
+        
+        {/* 3D Canvas - Only render on client side */}
+        {isClient && (
+          <div className="glass-card rounded-xl overflow-hidden mb-8">
+            <Canvas
+              camera={{ position: [5, 3, 7], fov: 50 }}
+              style={{ height: '600px' }}
+              className="w-full"
+              gl={{ antialias: true, alpha: false }}
+              dpr={[1, 2]} // Limit pixel ratio for performance
+            >
+              <React.Suspense fallback={null}>
+                <Scene />
+              </React.Suspense>
+              <OrbitControls
+                enableDamping
+                dampingFactor={0.05}
+                autoRotate
+                autoRotateSpeed={0.3}
+                minDistance={4}
+                maxDistance={15}
+                rotateSpeed={0.4}
+              />
+            </Canvas>
+          </div>
+        )}
+
+        {/* Skills Grid (fallback/additional display) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {skills.map((skill) => (
+            <div 
+              key={skill.name} 
+              className="glass-card neon-border-subtle p-4 flex flex-col items-center gap-2 hover:scale-105 hover:shadow-neon transition-all duration-300 cursor-pointer group text-center"
+            >
+              <skill.icon className="w-10 h-10 mx-auto transition-transform duration-300 group-hover:scale-110" style={{ color: skill.color }} />
+              <span className="text-xs sm:text-sm text-gray-300 font-medium">{skill.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

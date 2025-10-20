@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { User, Mail, MessageSquare, Github, Linkedin, Send } from "lucide-react";
 import { ContactCard } from "@/components/Card";
@@ -53,27 +52,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-20">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-        className="inline-flex items-center gap-4 bg-primary/10 border border-primary/20 rounded-full px-8 py-4 mb-6"
-      >
-        <MessageSquare className="text-primary text-2xl" />
-        <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-bold">Let&apos;s Connect</h1>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.1 }}
-        className="flex gap-6 mb-10"
-      >
+    <div className="min-h-screen text-white flex flex-col items-center justify-center px-4 py-20">
+      <div className="inline-flex items-center gap-4 glass-card neon-border-subtle rounded-3xl px-8 py-4 mb-6">
+        <MessageSquare className="neon-text-subtle text-2xl" />
+        <h1 className="neon-text-subtle text-2xl sm:text-3xl lg:text-4xl font-bold">Let&apos;s Connect</h1>
+      </div>
+      <div className="flex gap-6 mb-10">
         <a
           href="mailto:karthikyam2006@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-2xl"
+          className="hover:text-primary hover:scale-110 transition-all duration-300 text-2xl"
         >
           <Mail />
         </a>
@@ -81,7 +70,7 @@ export default function ContactPage() {
           href="https://github.com/karthikyammanur"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-2xl"
+          className="hover:text-primary hover:scale-110 transition-all duration-300 text-2xl"
         >
           <Github />
         </a>
@@ -89,25 +78,20 @@ export default function ContactPage() {
           href="https://www.linkedin.com/in/karthik-yammanur/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-primary transition-colors text-2xl"
+          className="hover:text-primary hover:scale-110 transition-all duration-300 text-2xl"
         >
           <Linkedin />
         </a>
-      </motion.div>
+      </div>
       <ContactCard className="w-full">
-        <motion.form
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, delay: 0.2 }}
+        <form
           className="flex flex-col gap-5"
           onSubmit={handleSubmit}
         >
         {/* Success/Error Message */}
         {submitStatus !== "idle" && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`p-3 rounded-lg text-center text-sm font-medium ${
+          <div
+            className={`p-3 rounded-lg text-center text-sm font-medium transition-all duration-300 ${
               submitStatus === "success" 
                 ? "bg-green-900/50 text-green-300 border border-green-700" 
                 : "bg-red-900/50 text-red-300 border border-red-700"
@@ -116,7 +100,7 @@ export default function ContactPage() {
             {submitStatus === "success" 
               ? "Thank you! Your message has been sent successfully." 
               : "Sorry, there was an error sending your message. Please try again."}
-          </motion.div>
+          </div>
         )}
 
         <label className="flex flex-col gap-1">
@@ -130,7 +114,7 @@ export default function ContactPage() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+            className="neon-input"
             placeholder="Your full name"
           />
         </label>
@@ -146,7 +130,7 @@ export default function ContactPage() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+            className="neon-input"
             placeholder="your.email@example.com"
           />
         </label>
@@ -162,17 +146,15 @@ export default function ContactPage() {
             onChange={handleChange}
             required
             rows={5}
-            className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"
+            className="neon-input resize-none"
             placeholder="Tell me about your project or just say hello!"
           />
         </label>
 
-        <motion.button
+        <button
           type="submit"
           disabled={isSubmitting}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-in-out border border-white/20 bg-white/5 text-white px-8 py-4 rounded-xl font-semibold hover:scale-105 hover:shadow-[0_0_12px_#dc2626] hover:border-red-400 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+          className="glossy-button inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
@@ -185,8 +167,8 @@ export default function ContactPage() {
               Send Message
             </>
           )}
-        </motion.button>
-        </motion.form>
+        </button>
+        </form>
       </ContactCard>
     </div>
   );
