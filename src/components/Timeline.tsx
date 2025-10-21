@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin } from "lucide-react";
+import { ChevronDown, Briefcase, Calendar } from "lucide-react";
 import Card from "./Card";
 
 interface Experience {
@@ -109,11 +109,10 @@ const experiences: Experience[] = [
 interface ExperienceCardProps {
   experience: Experience;
   isLeft: boolean;
-  index: number;
   experienceRef: (el: HTMLDivElement | null) => void;
 }
 
-function ExperienceCard({ experience, isLeft, index, experienceRef }: ExperienceCardProps) {
+function ExperienceCard({ experience, isLeft, experienceRef }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -265,7 +264,6 @@ export default function Timeline() {
                   <ExperienceCard 
                     experience={experience} 
                     isLeft={index % 2 === 0}
-                    index={index}
                     experienceRef={(el) => {
                       experienceRefs.current[index] = el;
                       return el;
