@@ -4,26 +4,6 @@ import { Github, ExternalLink, Code2, Cpu, Database, Palette } from "lucide-reac
 import { useState } from "react";
 import Image from "next/image";
 
-const techColors: Record<string, string> = {
-  Python: "bg-blue-500 text-white",
-  "C++": "bg-blue-400 text-white",
-  React: "bg-primary text-white",
-  "Next.js": "bg-gray-800 text-white",
-  Flask: "bg-green-700 text-white",
-  "Gemini API": "bg-purple-500 text-white",
-  LSTM: "bg-red-500 text-white",
-  "Chart.js": "bg-orange-400 text-white",
-  FastAPI: "bg-green-500 text-white",
-  ChromaDB: "bg-fuchsia-500 text-white",
-  MongoDB: "bg-green-700 text-white",
-  Tailwind: "bg-sky-400 text-white",
-  VAE: "bg-yellow-400 text-black",
-  VQGAN: "bg-indigo-500 text-white",
-  JavaScript: "bg-yellow-400 text-black",
-  TypeScript: "bg-blue-600 text-white",
-  // Add more as needed
-};
-
 interface ProjectCardProps {
   title: string;
   description: string;
