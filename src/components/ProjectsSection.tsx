@@ -5,10 +5,20 @@ import Link from "next/link";
 
 const projects = [
 	{
+    title: "AutoPM (2nd Place @ HackUTD 2025)",
+    description:
+      "AI-powered Product Management copilot built at HackUTD 2025 that automates end-to-end PM workflows through specialized LangGraph agents. Features 8 intelligent agents powered by Gemini 2.0 Flash for idea generation with data-backed research, user story creation with acceptance criteria, market research and competitor analysis, RICE prioritization, OKR alignment via PDF ingestion, automated stakeholder emails through Gmail API, interactive wireframe generation, and Jira ticket creation. Implementing type-safe state management with Zod validation and context-aware AI assistance that leverages project history for strategic decision-making. Bagged 2ND PLACE among 1200+ participants",
+    techStack: ["LangGraph", "LangChain", "Gemini 2.0", "Next.js", "TypeScript", "MongoDB", "Tailwind", "Auth0", "Jira API", "Gmail API"],
+    githubLink: "https://github.com/karthikyammanur/auto-pm-hackutd-2025",
+    liveLink: "https://www.youtube.com/watch?v=sNpusFMyFoI",
+    imageSrc: "/autopm_image.png",
+  	},
+	{
     title: "AgentFlow",
     description:
       "Full-stack AI agent deployment platform currently in development, featuring secure sandboxed execution with VM2 and child processes, real-time monitoring, and one-click deployments. Architected with Next.js, Prisma ORM, and GitHub OAuth, implementing strict timeouts, memory limits, and security scanning to safely run untrusted JavaScript and Python code. Built responsive dashboard with Gemini AI chat integration achieving 3-8s response times and modular component architecture for scalable agent management.",
     techStack: ["Next.js", "TypeScript", "Prisma", "NextAuth.js", "Gemini API", "VM2"],
+    githubLink: "https://github.com/karthikyammanur/agentflow",
     imageSrc: "/agentflow_image.png",
   	},
 	{
@@ -19,15 +29,7 @@ const projects = [
 		githubLink: "https://github.com/karthikyammanur/acm-celestAI-vae-vqgan",
 		imageSrc: "/celestai_image.png",
 	},
-	{
-		title: "Arkos",
-		description:
-			"Developed an AI-powered energy advisory platform featuring an LSTM model for demand forecasting and a RAG system for document-grounded insights. Integrated Gemini API, PyMuPDF, and ChromaDB within a Flask backend, and built a responsive React frontend with Chart.js visualizations and AI-generated energy recommendations.",
-		techStack: ["React", "Flask", "Gemini API", "LSTM", "Chart.js"],
-		githubLink: "https://github.com/karthikyammanur/arkos",
-		liveLink: "https://www.youtube.com/watch?v=3TiOBKwIfVY",
-		imageSrc: "/arkos_image.jpg",
-	},
+	
 	
 	// Add more projects as needed
 ];

@@ -9,14 +9,24 @@ import Card from "@/components/Card";
 const allProjects = [
   // Featured Projects (from home page)
   {
+    title: "AutoPM (2nd Place @ HackUTD 2025)",
+    description:
+      "AI-powered Product Management copilot built at HackUTD 2025 that automates end-to-end PM workflows through specialized LangGraph agents. Features 8 intelligent agents powered by Gemini 2.0 Flash for idea generation with data-backed research, user story creation with acceptance criteria, market research and competitor analysis, RICE prioritization, OKR alignment via PDF ingestion, automated stakeholder emails through Gmail API, interactive wireframe generation, and Jira ticket creation. Implementing type-safe state management with Zod validation and context-aware AI assistance that leverages project history for strategic decision-making. Bagged 2ND PLACE among 1200+ participants.",
+    techStack: ["LangGraph", "LangChain", "Gemini 2.0", "Next.js", "TypeScript", "MongoDB", "Tailwind", "Auth0", "Jira API", "Gmail API"],
+    githubLink: "https://github.com/karthikyammanur/auto-pm-hackutd-2025",
+    liveLink: "https://www.youtube.com/watch?v=sNpusFMyFoI",
+    imageSrc: "/autopm_image.png",
+  },
+  {
     title: "AgentFlow",
     description:
       "Full-stack AI agent deployment platform currently in development, featuring secure sandboxed execution with VM2 and child processes, real-time monitoring, and one-click deployments. Architected with Next.js, Prisma ORM, and GitHub OAuth, implementing strict timeouts, memory limits, and security scanning to safely run untrusted JavaScript and Python code. Built responsive dashboard with Gemini AI chat integration achieving 3-8s response times and modular component architecture for scalable agent management.",
     techStack: ["Next.js", "TypeScript", "Prisma", "NextAuth.js", "Gemini API", "VM2"],
+    githubLink: "https://github.com/karthikyammanur/agentflow",
     imageSrc: "/agentflow_image.png",
   },
   {
-    title: "EduTube",
+    title: "EduTube (HackRice 2025)",
     description:
       "AI-powered lecture companion built at HackRice 2025 that transforms video lectures into interactive study materials. Features semantic search through video content, auto-generated study notes, quiz questions and flashcards, and timestamp navigation. Built with React, Fastify, TwelveLabs for video understanding, and Gemini for content generation, enabling students to efficiently learn from any lecture video.",
     techStack: ["React", "Vite", "TypeScript", "Fastify", "TwelveLabs", "Gemini API", "Google Cloud"],
@@ -41,7 +51,7 @@ const allProjects = [
     imageSrc: "/celestai_image.png",
   },
   {
-    title: "Arkos",
+    title: "Arkos (HackAI 2025, UT Dallas)",
     description:
       "Developed an AI-powered energy advisory platform featuring an LSTM model for demand forecasting and a RAG system for document-grounded insights. Integrated Gemini API, PyMuPDF, and ChromaDB within a Flask backend, and built a responsive React frontend with Chart.js visualizations and AI-generated energy recommendations.",
     techStack: ["React", "Flask", "Gemini API", "LSTM", "Chart.js"],
@@ -69,7 +79,7 @@ const allProjects = [
     imageSrc: "/dance_school_image.jpg",
   },
   {
-    title: "SignLang AI – HackUTD 2024",
+    title: "SignLang AI (HackUTD 2024)",
     description:
       "SignLang AI is a real-time American Sign Language (ASL) translator built for HackUTD 2024. Using TensorFlow and OpenCV, it recognizes all 26 alphabet signs from live webcam input and translates them directly in the browser. The model achieves high accuracy and runs seamlessly within a custom UI, making it accessible for real-time communication and educational use.",
     techStack: ["TensorFlow", "OpenCV", "JavaScript", "Python", "HTML/CSS"],
@@ -84,20 +94,18 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen text-white">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center px-4 py-20 lg:py-32">
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className="inline-flex items-center gap-4 glass-card neon-border-subtle rounded-3xl px-8 py-4 mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold">
-            <FaCode className="neon-text-subtle text-2xl sm:text-3xl" />
-            <span className="neon-text-subtle">Project Showcase</span>
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
-            A collection of projects showcasing my expertise in AI, web development, 
-            and full-stack solutions. From machine learning models to production applications.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
+			{/* Hero Section */}
+			<section className="flex flex-col items-center justify-center px-4 py-12 sm:py-16 lg:py-24 xl:py-32">
+				<div className="text-center max-w-4xl mx-auto">
+					<h1 className="inline-flex items-center gap-3 sm:gap-4 glass-card neon-border-subtle rounded-3xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 mb-6 text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold">
+						<FaCode className="neon-text-subtle text-xl sm:text-2xl lg:text-3xl" />
+						<span className="neon-text-subtle">Project Showcase</span>
+					</h1>
+					
+					<p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed px-4">
+						A collection of projects showcasing my expertise in AI, web development, 
+						and full-stack solutions. From machine learning models to production applications.
+					</p>          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <FaRocket className="text-white" />
               <span>Production Ready</span>
@@ -115,47 +123,47 @@ export default function Projects() {
       </section>
 
       {/* View Toggle */}
-      <section className="w-full max-w-7xl mx-auto px-4 mb-8">
+      <section className="w-full max-w-7xl mx-auto px-4 mb-6 sm:mb-8">
         <div className="flex justify-center">
           <div className="glass-card neon-border-subtle rounded-2xl p-1 flex gap-1">
             <button
               onClick={() => setViewMode("list")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-xl transition-all duration-300 ${
                 viewMode === "list"
                   ? "bg-red-500/20 neon-border text-white"
                   : "text-gray-400 hover:text-white hover:bg-red-500/10"
               }`}
             >
-              <FaList className="w-4 h-4" />
-              <span className="font-medium">List View</span>
+              <FaList className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="text-xs sm:text-sm lg:text-base font-medium">List</span>
             </button>
             <button
               onClick={() => setViewMode("cards")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-xl transition-all duration-300 ${
                 viewMode === "cards"
                   ? "bg-red-500/20 neon-border text-white"
                   : "text-gray-400 hover:text-white hover:bg-red-500/10"
               }`}
             >
-              <FaTh className="w-4 h-4" />
-              <span className="font-medium">Card View</span>
+              <FaTh className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="text-xs sm:text-sm lg:text-base font-medium">Cards</span>
             </button>
           </div>
         </div>
       </section>
 
       {/* Projects Display */}
-      <section className="w-full max-w-7xl mx-auto px-4 py-8">
+      <section className="w-full max-w-7xl mx-auto px-4 py-6 sm:py-8">
         {viewMode === "list" ? (
           // List View
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4">
             {allProjects.map((project) => (
               <ProjectListItem key={project.title} project={project} />
             ))}
           </div>
         ) : (
           // Card View
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
             {allProjects.map((project) => (
               <div key={project.title}>
                 <ProjectCard {...project} />

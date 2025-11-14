@@ -210,10 +210,10 @@ export default function Timeline() {
   };
 
   return (
-    <div className="relative max-w-6xl mx-auto px-4 py-8">
+    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       <div className="flex gap-8">
         {/* Quick Navigation - Left Side */}
-        <div className="hidden xl:block fixed left-8 top-1/2 -translate-y-1/2 w-64 z-40">
+        <div className="hidden xl:block fixed left-4 2xl:left-8 top-1/2 -translate-y-1/2 w-56 2xl:w-64 z-40">
           <div className="glass-card neon-border-subtle rounded-2xl p-4 backdrop-blur-xl">
             <div className="flex items-center gap-3 mb-4">
               <Briefcase className="w-5 h-5 text-primary" />
