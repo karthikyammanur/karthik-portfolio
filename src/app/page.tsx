@@ -37,12 +37,12 @@ export default function Home() {
 			<section className="min-h-[90vh] w-full px-4 py-16 flex items-center justify-center">
 				<div className="w-full max-w-[95vw] flex flex-col lg:flex-row gap-8 items-center">
 			{/* Left Column - Name, Title, and Links (Compact) */}
-			<div className="lg:w-[35%] flex flex-col items-center lg:items-start text-center lg:text-left">
+			<div className="lg:w-[35%] flex flex-col items-center lg:items-start text-center lg:text-left w-full">
 				{/* Name with Portrait Icon */}
-				<div className="flex items-center gap-4 mb-4">
+				<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-4 w-full">
 					{/* Portrait Image - Icon Size */}
 					<div className="relative flex-shrink-0">
-						<div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl overflow-hidden neon-border-subtle shadow-[0_0_20px_rgba(255,0,0,0.3)]">
+						<div className="relative w-20 h-20 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl overflow-hidden neon-border-subtle shadow-[0_0_20px_rgba(255,0,0,0.3)]">
 							<Image
 								src="/portrait_image.png"
 								alt="Karthik Yammanur"
@@ -55,7 +55,7 @@ export default function Home() {
 						<div className="absolute inset-0 rounded-2xl bg-red-500/10 blur-lg -z-10"></div>
 					</div>
 					
-					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+					<h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold break-words">
 						I&apos;m Karthik Yammanur
 					</h1>
 				</div>						<TypingAnimation />
@@ -88,15 +88,15 @@ export default function Home() {
 					</div>
 					
 					{/* Right Column - Large Möbius Strip (Takes up most of the space) */}
-					<div className="lg:w-[65%] w-full">
+					<div className="lg:w-[65%] w-full h-[400px] sm:h-[500px] lg:h-auto">
 						<AboutSection />
 					</div>
 				</div>
 			</section>
-			<section className="py-20 px-6">
+			<section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
 				<ProjectsSection />
 			</section>
-			<section className="py-20 px-6">
+			<section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
 				<ExperienceSection />
 			</section>
 		</>

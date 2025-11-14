@@ -52,10 +52,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen text-white flex flex-col items-center justify-center px-4 py-20">
-      <div className="inline-flex items-center gap-4 glass-card neon-border-subtle rounded-3xl px-8 py-4 mb-6">
-        <MessageSquare className="neon-text-subtle text-2xl" />
-        <h1 className="neon-text-subtle text-2xl sm:text-3xl lg:text-4xl font-bold">Let&apos;s Connect</h1>
+    <div className="min-h-screen text-white flex flex-col items-center justify-center px-4 py-20 sm:py-24">
+      <div className="inline-flex items-center gap-3 sm:gap-4 glass-card neon-border-subtle rounded-3xl px-4 sm:px-6 lg:px-8 py-3 sm:py-4 mb-6">
+        <MessageSquare className="neon-text-subtle text-xl sm:text-2xl" />
+        <h1 className="neon-text-subtle text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold">Let&apos;s Connect</h1>
       </div>
       <div className="flex gap-6 mb-10">
         <a
