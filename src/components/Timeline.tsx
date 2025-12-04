@@ -19,7 +19,7 @@ const experiences: Experience[] = [
   {
     id: 1,
     company: "Manada Technologies",
-    role: "AI/ML & Full Stack Developer Intern",
+    role: "Software Engineering Intern",
     period: "September 2025 - December 2025",
     summary: "Developing an enterprise-grade Lending Bot with anti-hallucination validation for financial document processing using Azure OpenAI Assistants API and GPT-4o-mini.",
     highlights: [
