@@ -7,7 +7,7 @@ import Card from "./Card";
 const featuredExperiences = [
   {
     company: "Manada Technologies",
-    role: "AI/ML & Full Stack Developer Intern",
+    role: "Software Engineering Intern",
     period: "September 2025 - December 2025",
     summary: "Developing an enterprise-grade Lending Bot with anti-hallucination validation for financial document processing ",
     technologies: ["Python", "Azure Cloud", "React", "Node.js", "pdfplumber", "TensorFlow", "PyTorch"]
