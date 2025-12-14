@@ -484,20 +484,23 @@ export default function MobiusStrip3D() {
       <Canvas
         camera={{ position: [6, 4, 8], fov: 60 }}
         className="w-full h-full"
-        gl={{ antialias: true, alpha: false }}
-        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
+        dpr={[1, 1.5]}
+        frameloop="demand"
+        performance={{ min: 0.5 }}
       >
         <React.Suspense fallback={null}>
           <Scene />
         </React.Suspense>
         <OrbitControls
           enableDamping
-          dampingFactor={0.05}
+          dampingFactor={0.08}
           autoRotate
-          autoRotateSpeed={0.9}
+          autoRotateSpeed={0.5}
           minDistance={6}
           maxDistance={8}
-          rotateSpeed={0.9}
+          rotateSpeed={0.7}
+          enablePan={false}
         />
       </Canvas>
     </div>
