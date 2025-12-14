@@ -27,8 +27,13 @@ export default function CustomCursor() {
     return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
-  // Ultra-fast mouse position update
+  // Throttled mouse position update for better Chrome performance
+  const lastUpdateRef = useRef(0);
   const updateMousePosition = useCallback((e: MouseEvent) => {
+    const now = performance.now();
+    if (now - lastUpdateRef.current < 16) return; // ~60fps throttle
+    lastUpdateRef.current = now;
+    
     setMousePosition({ x: e.clientX, y: e.clientY });
     setIsVisible(true);
   }, []);
