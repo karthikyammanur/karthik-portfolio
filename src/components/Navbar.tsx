@@ -73,11 +73,14 @@ export default function Navbar() {
 		e.preventDefault();
 		setMenuOpen(false);
 
+		const targetUrl = href === "#hero" ? "/" : "/" + href;
+
 		if (!isHome) {
-			router.push("/" + href);
+			router.push(targetUrl);
 			return;
 		}
 
+		window.history.pushState(null, "", targetUrl);
 		setActiveSection(href.replace("#", ""));
 		if (href === "#hero") {
 			window.scrollTo({ top: 0, behavior: "smooth" });

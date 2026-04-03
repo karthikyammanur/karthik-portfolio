@@ -1,5 +1,6 @@
 "use client";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import DevpostIcon from "./DevpostIcon";
 import Card from "./Card";
 
@@ -8,6 +9,30 @@ import Card from "./Card";
 
 
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
+
+  const handleScrollTo = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    const targetUrl = href === "#hero" ? "/" : "/" + href;
+    
+    if (!isHome) {
+      router.push(targetUrl);
+      return;
+    }
+    
+    window.history.pushState(null, "", targetUrl);
+    if (href === "#hero") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   return (
     <footer className="w-full px-4 py-12 relative">
       <div className="absolute inset-0 grid-overlay opacity-30"></div>
@@ -30,16 +55,16 @@ export default function Footer() {
           <div className="text-center">
             <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
             <div className="flex flex-col gap-2">
-              <a href="/#hero" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              <a href="/#hero" onClick={(e) => handleScrollTo(e, "#hero")} className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Home
               </a>
-              <a href="/#projects" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              <a href="/#projects" onClick={(e) => handleScrollTo(e, "#projects")} className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Projects
               </a>
-              <a href="/#experience" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              <a href="/#experience" onClick={(e) => handleScrollTo(e, "#experience")} className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Experience
               </a>
-              <a href="/#contact" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              <a href="/#contact" onClick={(e) => handleScrollTo(e, "#contact")} className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Contact
               </a>
             </div>
