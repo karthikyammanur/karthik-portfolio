@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 :root {
   --background: #000000;
   --foreground: #ffffff;
@@ -68,24 +73,22 @@
   pointer-events: none;
 }
 
-/* Grid Overlay Pattern - Subtle by default, enhanced with cursor lighting */
+/* Hex Grid Overlay Pattern - Subtle background, enhanced with cursor reveal */
 .grid-overlay {
   position: relative;
   background-color: #000000;
-  background-image: 
-    linear-gradient(rgba(255, 0, 0, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.12) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: -1px -1px;
-  background-attachment: fixed;
 }
 
-.grid-overlay-subtle {
-  background-image: 
-    linear-gradient(rgba(255, 0, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.08) 1px, transparent 1px);
-  background-size: 30px 30px;
-  background-attachment: fixed;
+.grid-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='97'%3E%3Cpath d='M0,24.25 L14,0 L42,0 L56,24.25 L42,48.5 L14,48.5Z M56,24.25 L84,24.25 M84,72.75 L56,72.75 L42,97 L14,97 L0,72.75 L14,48.5' fill='none' stroke='%23ff0000' stroke-opacity='0.04' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 84px 97px;
+  background-position: -28px -24.25px;
 }
 
 /* Neon Line/Divider */
@@ -97,14 +100,13 @@
 
 /* Glossy Button */
 .glossy-button {
-  background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, rgba(255, 0, 0, 0.1) 100%);
-  border: 2px solid rgba(255, 0, 0, 0.6);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   padding: 12px 24px;
-  border-radius: 12px;
+  border-radius: 0;
   font-weight: 600;
 }
 
@@ -115,15 +117,13 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
   transition: left 0.5s;
 }
 
 .glossy-button:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.6), 0 0 60px rgba(255, 0, 0, 0.4);
-  border-color: rgba(255, 0, 0, 0.9);
-  border-width: 2px;
+  background: rgba(255, 0, 0, 0.15);
+  border-color: rgba(255, 0, 0, 0.7);
 }
 
 .glossy-button:hover::before {
@@ -137,7 +137,7 @@
   color: #ffffff;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 16px;
 }
 
@@ -151,6 +151,22 @@
 
 .neon-input::placeholder {
   color: #666666;
+}
+
+.no-glow-input,
+.no-glow-input:focus {
+  box-shadow: none !important;
+}
+
+.no-glow-button,
+.no-glow-button:hover,
+.no-glow-button:focus,
+.no-glow-button:active {
+  box-shadow: none !important;
+}
+
+.no-glow-button::before {
+  display: none;
 }
 
 /* Tron Timeline Dot */
@@ -188,36 +204,14 @@ body::before {
   z-index: 50;
 }
 
-/* Glitch effect for headings */
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(2px, -2px); }
-  60% { transform: translate(-1px, 1px); }
-  80% { transform: translate(1px, -1px); }
-  100% { transform: translate(0); }
+/* Portrait pulsate — subtle glow pulse every 3s */
+@keyframes portraitPulsate {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(255, 0, 0, 0.5), 0 0 60px rgba(255, 0, 0, 0.2); }
 }
 
-.glitch {
-  animation: glitch 1s infinite;
-}
-
-/* Subtle glitch variant for less aggressive animation */
-@keyframes glitch-subtle {
-  0% { transform: translate(0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-0.5px, 0.5px); }
-  100% { transform: translate(0); }
-}
-
-.glitch-subtle {
-  animation: glitch-subtle 2s infinite;
-}
-
-/* Glitch on hover only */
-.glitch-hover:hover {
-  animation: glitch 0.5s infinite;
+.portrait-pulsate {
+  animation: portraitPulsate 1.5s ease-in-out infinite;
 }
 
 body {
@@ -225,6 +219,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
   letter-spacing: 0.025em;
+}
+
+/* Ensure all content layers sit above the hex reveal canvas (z-index: 1) */
+main, nav, footer {
+  position: relative;
+  z-index: 2;
 }
 
 /* Hide cursor only on desktop/non-touch devices */
@@ -254,6 +254,12 @@ button {
   text-transform: uppercase;
 }
 
+/* Override uppercase for terminal-style elements */
+button.lowercase {
+  text-transform: lowercase;
+  letter-spacing: normal;
+}
+
 /* Navigation and special elements */
 nav {
   font-family: var(--font-tomorrow), 'Tomorrow', sans-serif;
@@ -267,14 +273,37 @@ nav {
   text-transform: uppercase;
 }
 
-/* Fade In Animation for Skill Labels */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* HUD Pulse Animation */
+@keyframes hudPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* HUD Tech Tag Hover */
+.hud-tag:hover {
+  border-color: rgba(255,0,0,0.35) !important;
+  color: rgba(255,60,60,0.8) !important;
+}
+
+/* Navbar scanner line animation for active link */
+@keyframes navScan {
+  0% { left: 0; width: 0; }
+  30% { left: 0; width: 100%; }
+  70% { left: 0; width: 100%; }
+  100% { left: 100%; width: 0; }
+}
+
+.nav-scanner {
+  position: relative;
+}
+
+.nav-scanner::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  background: #ff0000;
+  box-shadow: 0 0 6px #ff0000, 0 0 12px rgba(255, 0, 0, 0.4);
+  animation: navScan 2.5s ease-in-out infinite;
 }
