@@ -1,74 +1,46 @@
 "use client";
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Line, Html } from '@react-three/drei';
+import { OrbitControls, Line } from '@react-three/drei';
 import * as THREE from 'three';
-import { 
-  SiReact, SiTypescript, SiPython, SiTensorflow, 
-  SiNextdotjs, SiTailwindcss, SiFlutter, SiFlask,
-  SiGit, SiCplusplus, SiJavascript, SiMongodb,
-  SiPostgresql, SiSupabase, SiNumpy, SiHtml5,
-  SiFastapi, SiGithub
-} from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
-import { VscCode } from 'react-icons/vsc';
 
 // Constants
-const SPEED = 0.3;
+const SPEED = 0.04; // Slowed down significantly
 const TRAIL_LENGTH = 15;
 const STRIP_SEGMENTS = 100;
 const RADIUS = 3;
 const WIDTH = 0.8;
 
-// Skills data - organized by category
+// Skills data - simple list
 const skills = [
-  // Languages
-  { name: "Python", icon: SiPython, color: '#3776ab' },
-  { name: "C++", icon: SiCplusplus, color: '#00599c' },
-  { name: "TypeScript", icon: SiTypescript, color: '#3178c6' },
-  { name: "JavaScript", icon: SiJavascript, color: '#f7df1e' },
-  { name: "Java", icon: FaJava, color: '#007396' },
-  { name: "HTML/CSS", icon: SiHtml5, color: '#e34f26' },
-  
-  // Frameworks & Tools
-  { name: "React", icon: SiReact, color: '#61dafb' },
-  { name: "Next.js", icon: SiNextdotjs, color: '#ffffff' },
-  { name: "Flutter", icon: SiFlutter, color: '#02569b' },
-  { name: "Tailwind CSS", icon: SiTailwindcss, color: '#06b6d4' },
-  { name: "Flask", icon: SiFlask, color: '#ffffff' },
-  { name: "FastAPI", icon: SiFastapi, color: '#009688' },
-  
-  // Libraries & APIs
-  { name: "TensorFlow", icon: SiTensorflow, color: '#ff6f00' },
-  { name: "NumPy", icon: SiNumpy, color: '#013243' },
-  
-  // Databases
-  { name: "MongoDB", icon: SiMongodb, color: '#47a248' },
-  { name: "PostgreSQL", icon: SiPostgresql, color: '#4169e1' },
-  { name: "Supabase", icon: SiSupabase, color: '#3ecf8e' },
-  
-  // Developer Tools
-  { name: "Git", icon: SiGit, color: '#f05032' },
-  { name: "GitHub", icon: SiGithub, color: '#ffffff' },
-  { name: "VS Code", icon: VscCode, color: '#007acc' },
+  "Python", "C++", "TypeScript", "JavaScript", "Java", "HTML/CSS",
+  "React", "Next.js", "Flutter", "Tailwind CSS", "Flask", "FastAPI",
+  "TensorFlow", "NumPy", "MongoDB", "PostgreSQL", "Supabase",
+  "Git", "GitHub", "VS Code"
 ];
 
 // Generate Möbius strip geometry
 function generateMobiusGeometry(radius: number, width: number, segments: number) {
   const positions: number[] = [];
   const indices: number[] = [];
+  const uvs: number[] = [];
+  
+  const TEXTURE_REPEAT = 4;
   
   for (let i = 0; i <= segments; i++) {
     const u = (i / segments) * Math.PI * 2;
+    const texU = (i / segments) * TEXTURE_REPEAT;
     
     for (let j = 0; j <= 1; j++) {
       const v = (j - 0.5) * width;
+      const texV = j;
       
       const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
       const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
       const z = v * Math.sin(u / 2);
       
       positions.push(x, y, z);
+      uvs.push(texU, texV);
     }
   }
   
@@ -82,83 +54,181 @@ function generateMobiusGeometry(radius: number, width: number, segments: number)
     indices.push(b, d, c);
   }
   
-  return { positions: new Float32Array(positions), indices: new Uint16Array(indices) };
+  return { 
+    positions: new Float32Array(positions), 
+    indices: new Uint16Array(indices),
+    uvs: new Float32Array(uvs)
+  };
 }
 
-// Get position on Möbius strip
-function getMobiusPosition(t: number, radius: number, offset: number = 0) {
+// Get position on Möbius strip, with distinct normal calculation
+function getMobiusPosition(t: number, radius: number, offset: number = 0, normalOffset: number = 0) {
   const u = t * Math.PI * 2;
   const v = offset;
-  
+
+  // Base point on center strip
   const x = (radius + v * Math.cos(u / 2)) * Math.cos(u);
   const y = (radius + v * Math.cos(u / 2)) * Math.sin(u);
   const z = v * Math.sin(u / 2);
   
-  return new THREE.Vector3(x, y, z);
-}
-
-// Get tangent vector
-function getMobiusTangent(t: number, radius: number) {
-  const u = t * Math.PI * 2;
-  const du = 0.01;
+  if (normalOffset === 0) return new THREE.Vector3(x, y, z);
   
-  const p1 = getMobiusPosition(t, radius, 0);
-  const p2 = getMobiusPosition(t + du, radius, 0);
+  // Calculate Surface Normal
+  // Partial derivative w.r.t u
+  const dxdu = -Math.sin(u) * (radius + v * Math.cos(u/2)) - 0.5 * v * Math.sin(u/2) * Math.cos(u);
+  const dydu = Math.cos(u) * (radius + v * Math.cos(u/2)) - 0.5 * v * Math.sin(u/2) * Math.sin(u);
+  const dzdu = 0.5 * v * Math.cos(u/2);
   
-  return p2.clone().sub(p1).normalize();
+  // Partial derivative w.r.t v
+  const dxdv = Math.cos(u/2) * Math.cos(u);
+  const dydv = Math.cos(u/2) * Math.sin(u);
+  const dzdv = Math.sin(u/2);
+  
+  const U = new THREE.Vector3(dxdu, dydu, dzdu);
+  const V = new THREE.Vector3(dxdv, dydv, dzdv);
+  
+  const normal = new THREE.Vector3().crossVectors(U, V).normalize();
+  
+  // Push the point outwards along the normal vector
+  return new THREE.Vector3(x, y, z).add(normal.multiplyScalar(normalOffset));
 }
 
 // Möbius Strip Component with enhanced gradient and metallic effects
-function MobiusStrip() {
+function MobiusStrip({ t }: { t: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.MeshStandardMaterial>(null);
-  const geometry = useMemo(() => generateMobiusGeometry(RADIUS, WIDTH, STRIP_SEGMENTS), []);
-  const geometryRef = useRef<THREE.BufferGeometry>(null);
-  
-  // Animate emissive glow pulsing along the strip
-  useFrame((state) => {
+
+  const TEX_WIDTH = 4096;
+  const TEX_HEIGHT = 200;
+
+  const { textCanvas, textCtx, texture } = useMemo(() => {
+    if (typeof document === 'undefined') return { textCanvas: null, textCtx: null, texture: null };
+    const canvas = document.createElement('canvas');
+    canvas.width = TEX_WIDTH;
+    canvas.height = TEX_HEIGHT;
+    const ctx = canvas.getContext('2d')!;
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    return { textCanvas: canvas, textCtx: ctx, texture: tex };
+  }, []);
+
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const data = generateMobiusGeometry(RADIUS, WIDTH, STRIP_SEGMENTS);
+
+    geo.setAttribute('position', new THREE.BufferAttribute(data.positions, 3));
+    geo.setAttribute('uv', new THREE.BufferAttribute(data.uvs, 2));
+    geo.setIndex(new THREE.BufferAttribute(data.indices, 1));
+    geo.computeVertexNormals();
+
+    // Add vertex colors for gradient effect
+    const colors = new Float32Array(data.positions.length);
+    for (let i = 0; i < data.positions.length / 3; i++) {
+      const x = data.positions[i * 3];
+      const y = data.positions[i * 3 + 1];
+
+      // Calculate angle around the strip to create gradient
+      const angle = Math.atan2(y, x);
+      const normalizedAngle = (angle + Math.PI) / (Math.PI * 2); // 0 to 1
+
+      // Gradient from dark gray → darker → dark gray with subtle red warmth
+      const gradientPos = Math.abs(Math.sin(normalizedAngle * Math.PI));
+      const r = 0.16 + gradientPos * 0.16; // 0.16 to 0.32
+      const g = 0.14 + gradientPos * 0.13; // 0.14 to 0.27
+      const b = 0.13 + gradientPos * 0.12; // 0.13 to 0.25
+
+      colors[i * 3] = r;
+      colors[i * 3 + 1] = g;
+      colors[i * 3 + 2] = b;
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    return geo;
+  }, []);
+
+  const drawSkillTexture = (ctx: CanvasRenderingContext2D, scrollOffset: number, bikePosition: number) => {
+    // Clear with very dark red-black background
+    ctx.fillStyle = '#0a0202';
+    ctx.fillRect(0, 0, TEX_WIDTH, TEX_HEIGHT);
+
+    // Text settings - heavier and bolder font
+    ctx.font = '900 80px "Courier New", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const separator = '  ///  ';
+    const fullText = skills.join(separator) + separator;
+
+    const charWidth = 48; // Increased spacing to account for thicker font
+    const totalWidth = fullText.length * charWidth;
+    const offset = (scrollOffset * totalWidth) % totalWidth;
+
+    for (let rep = -1; rep <= 3; rep++) {
+      for (let i = 0; i < fullText.length; i++) {
+        const x = i * charWidth - offset + rep * totalWidth;
+        if (x < -100 || x > TEX_WIDTH + 100) continue;
+
+        const char = fullText[i];
+
+        const bikeX = bikePosition * TEX_WIDTH;
+        const distFromBike = Math.abs(x - bikeX);
+        const wrapDist = Math.min(distFromBike, Math.abs(x - (bikeX - TEX_WIDTH)), Math.abs(x - (bikeX + TEX_WIDTH)));
+        const bikeGlow = Math.max(0, 1 - wrapDist / 400);
+
+        let brightness = 0.6 + 0.2 * Math.sin((x + offset) * 0.008);
+        if (bikeGlow > 0) {
+          brightness += bikeGlow * 0.6;
+        }
+
+        if (char === '/') {
+          ctx.fillStyle = `rgba(255, ${Math.floor(50 + bikeGlow * 150)}, ${Math.floor(50 + bikeGlow * 100)}, ${Math.min(1, brightness * 0.5)})`;
+        } else if (char === ' ') {
+          continue;
+        } else {
+          ctx.fillStyle = `rgba(255, ${Math.floor(80 + bikeGlow * 175)}, ${Math.floor(80 + bikeGlow * 175)}, ${Math.min(1, brightness)})`;
+        }
+
+        ctx.fillText(char, x, TEX_HEIGHT / 2);
+      }
+    }
+
+    // Horizontal scanlines
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.08)';
+    for (let y = 0; y < TEX_HEIGHT; y += 8) {
+      ctx.fillRect(0, y, TEX_WIDTH, 2);
+    }
+  };
+
+  const scrollRef = useRef(0);
+  const frameCount = useRef(0);
+
+  // Animate emissive glow pulsing along the strip and text scroll
+  useFrame((state, delta) => {
+    scrollRef.current += delta * 0.04; // Scroll speed
+    frameCount.current++;
+    
+    // Throttle redrawing to every 2nd frame for performance
+    if (textCtx && texture && frameCount.current % 2 === 0) {
+      // Pass the bike's position `t` (0-1) reversed because UV maps wrap the other way compared to the bike
+      drawSkillTexture(textCtx, scrollRef.current, (1 - t) % 1);
+      texture.needsUpdate = true;
+    }
+
     if (materialRef.current) {
-      const t = state.clock.getElapsedTime();
-      const intensity = 0.2 + Math.sin(t * 2) * 0.15; // Pulse between 0.2 and 0.35
+      const time = state.clock.getElapsedTime();
+      const intensity = 0.8 + Math.sin(time * 2) * 0.2; 
       materialRef.current.emissiveIntensity = intensity;
     }
   });
-  
-  React.useEffect(() => {
-    if (geometryRef.current) {
-      geometryRef.current.setAttribute('position', new THREE.BufferAttribute(geometry.positions, 3));
-      geometryRef.current.setIndex(new THREE.BufferAttribute(geometry.indices, 1));
-      geometryRef.current.computeVertexNormals();
-      
-      // Add vertex colors for gradient effect
-      const colors = new Float32Array(geometry.positions.length);
-      for (let i = 0; i < geometry.positions.length / 3; i++) {
-        const x = geometry.positions[i * 3];
-        const y = geometry.positions[i * 3 + 1];
-        
-        // Calculate angle around the strip to create gradient
-        const angle = Math.atan2(y, x);
-        const normalizedAngle = (angle + Math.PI) / (Math.PI * 2); // 0 to 1
-        
-        // Gradient from dark red → black → dark red (emphasizes infinity loop)
-        const gradientPos = Math.abs(Math.sin(normalizedAngle * Math.PI));
-        const r = 0.06 + gradientPos * 0.14; // 0.06 to 0.2
-        const g = 0.03 + gradientPos * 0.02; // 0.03 to 0.05
-        const b = 0.03 + gradientPos * 0.02; // 0.03 to 0.05
-        
-        colors[i * 3] = r;
-        colors[i * 3 + 1] = g;
-        colors[i * 3 + 2] = b;
-      }
-      geometryRef.current.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    }
-  }, [geometry]);
-  
+
   const edge1Points = useMemo(() => {
     const points = [];
     for (let i = 0; i <= STRIP_SEGMENTS; i++) {
-      const t = i / STRIP_SEGMENTS;
-      points.push(getMobiusPosition(t, RADIUS, 0.4));
+      const tPos = i / STRIP_SEGMENTS;
+      points.push(getMobiusPosition(tPos, RADIUS, 0.4));
     }
     return points;
   }, []);
@@ -166,8 +236,8 @@ function MobiusStrip() {
   const edge2Points = useMemo(() => {
     const points = [];
     for (let i = 0; i <= STRIP_SEGMENTS; i++) {
-      const t = i / STRIP_SEGMENTS;
-      points.push(getMobiusPosition(t, RADIUS, -0.4));
+      const tPos = i / STRIP_SEGMENTS;
+      points.push(getMobiusPosition(tPos, RADIUS, -0.4));
     }
     return points;
   }, []);
@@ -175,26 +245,27 @@ function MobiusStrip() {
   const centerPoints = useMemo(() => {
     const points = [];
     for (let i = 0; i <= STRIP_SEGMENTS; i++) {
-      const t = i / STRIP_SEGMENTS;
-      points.push(getMobiusPosition(t, RADIUS, 0));
+      const tPos = i / STRIP_SEGMENTS;
+      points.push(getMobiusPosition(tPos, RADIUS, 0));
     }
     return points;
   }, []);
   
   return (
     <group>
-      <mesh ref={meshRef}>
-        <bufferGeometry ref={geometryRef} />
+      <mesh ref={meshRef} geometry={geometry}>
         <meshStandardMaterial
           ref={materialRef}
-          color="#0d0d0d"
-          metalness={0.95}
-          roughness={0.2}
-          emissive="#330000"
-          emissiveIntensity={0.25}
+          color="#2a1515"
+          metalness={0.85}
+          roughness={0.4}
+          emissive="#ffffff"
+          emissiveIntensity={1.2}
+          emissiveMap={texture || undefined}
+          map={texture || undefined}
           side={THREE.DoubleSide}
           vertexColors={true}
-          envMapIntensity={1.5}
+          envMapIntensity={1.2}
         />
       </mesh>
       
@@ -234,11 +305,13 @@ function TronBike({ t }: { t: number }) {
   
   useFrame(() => {
     if (bikeRef.current) {
-      const pos = getMobiusPosition(t, RADIUS, 0);
-      const tangent = getMobiusTangent(t, RADIUS);
+      // Add slight normal offset so bike hovers above the surface (0.08 units)
+      const pos = getMobiusPosition(t, RADIUS, 0, 0.08);
+      // Tangent for the look direction
+      const tangentPos = getMobiusPosition(t + 0.01, RADIUS, 0, 0.08); 
       
       bikeRef.current.position.copy(pos);
-      bikeRef.current.lookAt(pos.clone().add(tangent));
+      bikeRef.current.lookAt(tangentPos);
     }
   });
   
@@ -298,7 +371,8 @@ function LightTrail({ t }: { t: number }) {
     for (let i = 0; i < TRAIL_LENGTH; i++) {
       const offset = (i / TRAIL_LENGTH) * 0.1;
       const trailT = (step - offset + 1) % 1;
-      trailPoints.push(getMobiusPosition(trailT, RADIUS, 0));
+      // Normal offset matches the bike hovering height
+      trailPoints.push(getMobiusPosition(trailT, RADIUS, 0, 0.08));
     }
     return trailPoints;
   }, [Math.floor(t * 10)]);
@@ -311,65 +385,6 @@ function LightTrail({ t }: { t: number }) {
       transparent
       opacity={0.6}
     />
-  );
-}
-
-// Skills Icon Component with hover effects
-function SkillIcon({ skill, index, total }: { skill: typeof skills[0], index: number, total: number }) {
-  const [isHovered, setIsHovered] = React.useState(false);
-  const t = index / total;
-  const position = getMobiusPosition(t, RADIUS, 0.5);
-  
-  return (
-    <Html position={[position.x, position.y, position.z]} center>
-      <div 
-        className="relative group"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Icon container with hover glow effect */}
-        <div 
-          className={`glass-card p-2 backdrop-blur-md transition-all duration-300 ${
-            isHovered 
-              ? 'neon-border scale-110 shadow-[0_0_20px_rgba(255,0,0,0.6)]' 
-              : 'neon-border-subtle'
-          }`}
-          style={{ 
-            width: '48px', 
-            height: '48px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            backgroundColor: isHovered ? 'rgba(255,0,0,0.1)' : 'rgba(0,0,0,0.5)'
-          }}
-        >
-          <skill.icon 
-            className={`w-8 h-8 transition-all duration-300 ${isHovered ? 'drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]' : ''}`}
-            style={{ color: skill.color }} 
-          />
-        </div>
-        
-        {/* Skill name label on hover */}
-        {isHovered && (
-          <div 
-            className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 
-                       bg-black/90 backdrop-blur-sm px-3 py-1.5 rounded-md 
-                       neon-border whitespace-nowrap z-50
-                       animate-[fadeIn_0.2s_ease-in-out]"
-          >
-            <span className="text-sm font-medium neon-text">
-              {skill.name}
-            </span>
-            {/* Arrow pointing down */}
-            <div 
-              className="absolute top-full left-1/2 transform -translate-x-1/2 
-                         w-0 h-0 border-l-4 border-r-4 border-t-4 
-                         border-l-transparent border-r-transparent border-t-red-500/80"
-            />
-          </div>
-        )}
-      </div>
-    </Html>
   );
 }
 
@@ -440,13 +455,7 @@ function InteractiveGridFloor() {
 }
 
 // Main Scene Component
-function Scene() {
-  const [t, setT] = React.useState(0);
-  
-  useFrame((state, delta) => {
-    setT((prev) => (prev + delta * SPEED) % 1);
-  });
-  
+function Scene({ t }: { t: number }) {
   return (
     <>
       <color attach="background" args={['#000000']} />
@@ -459,27 +468,73 @@ function Scene() {
       {/* Interactive Grid Floor with cursor lighting */}
       <InteractiveGridFloor />
       
-      <MobiusStrip />
+      <MobiusStrip t={t} />
       <TronBike t={t} />
-      <LightTrail t={t} />
-      
-      {skills.map((skill, index) => (
-        <SkillIcon key={skill.name} skill={skill} index={index} total={skills.length} />
-      ))}
     </>
+  );
+}
+
+// Global Timer Component
+function TickerState({ children, onTick }: { children: React.ReactNode, onTick: (t: number) => void }) {
+  useFrame((state, delta) => {
+    onTick(delta);
+  });
+  return <>{children}</>;
+}
+
+// Active Text Display Component
+function ActiveSkillDisplay({ t }: { t: number }) {
+  const [activeSkill, setActiveSkill] = React.useState("");
+  
+  // Calculate which skill the bike is over based on t and texture mapping
+  useEffect(() => {
+    // The texture repeats 4 times around the track
+    const TEXTURE_REPEAT = 4;
+    // Account for reverse wrapping mapping direction
+    const mappedT = (1 - t) % 1; 
+    
+    // Each repeat segment length
+    let sectionProgress = (mappedT * TEXTURE_REPEAT) % 1;
+    
+    // Find absolute position within the skills array
+    const skillIndex = Math.floor(sectionProgress * skills.length);
+    const newSkill = skills[skillIndex];
+    if(newSkill !== activeSkill) {
+      setActiveSkill(newSkill);
+    }
+  }, [t, activeSkill]);
+
+  return (
+    <div className="absolute bottom-12 left-8 z-20 pointer-events-none text-left">
+      <div className="inline-block relative">
+        <div className="absolute inset-0 bg-red-900/20 blur-xl"></div>
+        <p className="font-mono text-xl sm:text-2xl lg:text-3xl font-bold tracking-[0.2em] uppercase text-white/90 drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] neon-text-subtle relative z-10 transition-all duration-75">
+          {activeSkill}
+        </p>
+      </div>
+      <p className="text-red-500/60 font-mono text-xs mt-2 tracking-widest uppercase">Target Lock Engaged</p>
+    </div>
   );
 }
 
 // Export the 3D Canvas Component
 export default function MobiusStrip3D() {
+  const [t, setT] = React.useState(0);
+  
+  const handleTick = React.useCallback((delta: number) => {
+    setT((prev) => (prev + delta * SPEED) % 1);
+  }, []);
+
   return (
     <div className="relative w-full h-full">
       {/* Interaction hint overlay at top center */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 pointer-events-none">
-        <p className="text-gray-400 text-sm animate-pulse backdrop-blur-sm bg-black/30 px-4 py-2 rounded-full border border-red-500/20">
+        <p className="text-gray-400 text-sm animate-pulse backdrop-blur-sm bg-black/30 px-4 py-2 border border-red-500/20">
           Drag to rotate • Scroll to zoom
         </p>
       </div>
+
+      <ActiveSkillDisplay t={t} />
       
       <Canvas
         camera={{ position: [6, 4, 8], fov: 60 }}
@@ -488,7 +543,9 @@ export default function MobiusStrip3D() {
         dpr={[1, 2]}
       >
         <React.Suspense fallback={null}>
-          <Scene />
+          <TickerState onTick={handleTick}>
+            <Scene t={t} />
+          </TickerState>
         </React.Suspense>
         <OrbitControls
           enableDamping
@@ -498,10 +555,9 @@ export default function MobiusStrip3D() {
           minDistance={6}
           maxDistance={8}
           rotateSpeed={0.9}
+          enableZoom={true}
         />
       </Canvas>
     </div>
   );
 }
-
-export { skills };
