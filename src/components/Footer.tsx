@@ -1,7 +1,11 @@
 "use client";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
-import Link from "next/link";
+import { Github, Linkedin, Mail } from "lucide-react";
+import DevpostIcon from "./DevpostIcon";
 import Card from "./Card";
+
+// ── Devpost Icon ─────────────────────────────────────────────────────────────
+
+
 
 export default function Footer() {
   return (
@@ -10,7 +14,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Neon divider line */}
         <div className="neon-line mb-12"></div>
-        
+
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
@@ -18,8 +22,7 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold text-white mb-4">Karthik Yammanur</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Computer Engineering student at UT Dallas, building AI-powered solutions 
-              and innovative web applications.
+              Computer Engineering at UT Dallas
             </p>
           </div>
 
@@ -27,18 +30,18 @@ export default function Footer() {
           <div className="text-center">
             <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
             <div className="flex flex-col gap-2">
-              <Link href="/" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              <a href="/#hero" className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Home
-              </Link>
-              <Link href="/projects" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              </a>
+              <a href="/#projects" className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Projects
-              </Link>
-              <Link href="/experience" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              </a>
+              <a href="/#experience" className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Experience
-              </Link>
-              <Link href="/contact" className="text-gray-400 hover:text-primary transition-colors text-sm">
+              </a>
+              <a href="/#contact" className="text-gray-400 hover:text-primary transition-colors text-sm">
                 Contact
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -48,7 +51,7 @@ export default function Footer() {
             <div className="flex justify-center md:justify-end gap-4">
               <a
                 href="mailto:karthikyam2006@gmail.com"
-                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-neon"
+                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:bg-red-500/10"
               >
                 <Mail className="w-5 h-5" />
               </a>
@@ -56,7 +59,7 @@ export default function Footer() {
                 href="https://github.com/karthikyammanur"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-neon"
+                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:bg-red-500/10"
               >
                 <Github className="w-5 h-5" />
               </a>
@@ -64,9 +67,17 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/karthik-yammanur/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:shadow-neon"
+                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:bg-red-500/10"
               >
                 <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="https://devpost.com/karthikyam2006"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 hover:bg-red-500/10"
+              >
+                <DevpostIcon className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -74,13 +85,18 @@ export default function Footer() {
 
         {/* Bottom Credit Card */}
         <div>
-          <Card className="text-center py-4">
+          <Card className="text-center py-4" hover={false}>
             <p className="text-gray-400 text-sm flex items-center justify-center gap-2">
-              © {new Date().getFullYear()} Website developed by Karthik Yammanur
+              Made by Karthik Yammanur | Inspired by TRON and Blade Runner
             </p>
           </Card>
+          <p className="mt-3 text-center text-xs sm:text-sm text-red-200/55 font-mono tracking-wide">
+            If you made it this far, try clicking on my picture at the top!
+          </p>
         </div>
       </div>
     </footer>
   );
 }
+
+
