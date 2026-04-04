@@ -10,18 +10,25 @@ Personal portfolio site with a TRON: ARES-inspired cyberpunk aesthetic — pure 
 - Three.js via @react-three/fiber and @react-three/drei
 - Framer Motion
 - Lucide React
+- Tomorrow (Google Fonts)
 - Nodemailer (Gmail SMTP) for the contact form
-- Vercel Analytics
+- Cloudinary (personal photo archive hosting)
 - Vercel (hosting and deployment)
 
 ## Features
 
-- Interactive 3D Möbius strip with animated TRON-bike trail and orbiting skill icons
-- Custom red triangle cursor, scanline overlay, and glitch effects
+- Interactive 3D Möbius strip with animated TRON-bike trail and orbiting the skills engraved into the strip
+- Custom cursor, scanline overlay, and HUD corner decorations
 - Responsive layout across desktop, tablet, and mobile
-- Routes for Projects, Experience, Resume, Contact, and a Classified page
+- Single-page app with anchor sections: Hero, Experience, Projects, Contact
+- HUD-style experience display
 - Contact form wired to Nodemailer over Gmail SMTP
-- Cloudinary-backed project gallery assets
+- Hidden `/classified` page — personal photo archive:
+  - Terminal boot sequence animation on first visit
+  - Location-organized masonry photo grid (8 cities across Texas, Boston, San Diego, Vegas)
+  - Folder tree sidebar (desktop) and collapsible mobile selector
+  - Lightbox with keyboard navigation (arrow keys, Escape)
+  - Cloudinary-hosted images
 
 ## Live Site
 
