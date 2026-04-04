@@ -1,36 +1,28 @@
 # Karthik Yammanur | Portfolio
 
-A modern, mobile-friendly portfolio website built with Next.js, Tailwind CSS, and Framer Motion. Showcases projects, skills, and contact info with a clean red-themed design and interactive effects.
+Personal portfolio site with a TRON: ARES-inspired cyberpunk aesthetic — pure black canvas, neon red accents, glassmorphism, and an interactive 3D Möbius strip centerpiece. Built with Next.js 16 and deployed on Vercel.
 
-## 🚀 Tech Stack
+## Tech Stack
 
-- Next.js 15 (App Router)
+- Next.js 16 (App Router) + React 19
 - TypeScript
 - Tailwind CSS
-- Framer Motion (animations)
-- Lucide React (icons)
-- Nodemailer (contact form email)
-- Vercel (hosting & deployment)
+- Three.js via @react-three/fiber and @react-three/drei
+- Framer Motion
+- Lucide React
+- Nodemailer (Gmail SMTP) for the contact form
+- Vercel Analytics
+- Vercel (hosting and deployment)
 
-## ✨ Features
+## Features
 
-- Responsive design for all devices
-- Animated hero section with portrait image
-- About, Projects, Experience, and Contact pages
-- Contact form with email integration
-- Social links (Email, GitHub, LinkedIn) everywhere
-- Red color scheme, glowing effects, custom cursor, and smooth transitions
+- Interactive 3D Möbius strip with animated TRON-bike trail and orbiting skill icons
+- Custom red triangle cursor, scanline overlay, and glitch effects
+- Responsive layout across desktop, tablet, and mobile
+- Routes for Projects, Experience, Resume, Contact, and a Classified page
+- Contact form wired to Nodemailer over Gmail SMTP
+- Cloudinary-backed project gallery assets
 
-## 📦 Setup
+## Live Site
 
-```bash
-npm install
-npm run dev
-```
-
-## 🖥️ Live Demo
-
-[View on Vercel](https://karthikyammanur.me/)
-
----
-
+[karthikyammanur.me](https://karthikyammanur.me/)
